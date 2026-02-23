@@ -1,0 +1,2505 @@
+@prefix : <http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#> .
+
+<http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm> rdf:type owl:Ontology ;
+                                                                    <http://purl.org/dc/elements/1.1/creator> "Fazia BRINIS" ;
+                                                                    <http://purl.org/dc/elements/1.1/rights> "This work is distributed under a  License" ;
+                                                                    <http://purl.org/dc/terms/license> "This work is distributed under a  License" ;
+                                                                    rdfs:comment "UCOMM (Universal, Ontology-guided Cataloguing Model for Manuscripts) is an Ontological model for the Heterogeneous Manuscript Resources" ;
+                                                                    rdfs:label "Universal, Ontology-guided Cataloguing Model for Manuscripts" ;
+                                                                    owl:versionInfo "version 1-1-2026" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/creator
+<http://purl.org/dc/elements/1.1/creator> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/description
+<http://purl.org/dc/elements/1.1/description> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/rights
+<http://purl.org/dc/elements/1.1/rights> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/license
+<http://purl.org/dc/terms/license> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#conservesCollection
+:conservesCollection rdf:type owl:ObjectProperty ;
+                     owl:inverseOf :hasConservationInstitution ;
+                     rdfs:domain :Institution ;
+                     rdfs:range :Collection ;
+                     rdfs:comment "an institution conserves a collection of manuscripts" ;
+                     rdfs:label "conserves collection" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#containsCity
+:containsCity rdf:type owl:ObjectProperty ;
+              rdfs:domain :Country ;
+              rdfs:range :City ;
+              rdfs:comment "a country contains cities" ;
+              rdfs:label "contains city" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#containsManuscript
+:containsManuscript rdf:type owl:ObjectProperty ;
+                    owl:inverseOf :isContainedInCollection ;
+                    rdfs:domain :Collection ;
+                    rdfs:range :Manuscript ;
+                    rdfs:comment "a collection has one or more manuscripts" ;
+                    rdfs:label "contains manuscript" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#containsRecord
+:containsRecord rdf:type owl:ObjectProperty ;
+                owl:inverseOf :isContainedInCatalogue ;
+                rdfs:domain :Catalogue ;
+                rdfs:range :Record ;
+                rdfs:comment "a catalogue contains one or more manuscript records" ;
+                rdfs:label "contains record" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#copied
+:copied rdf:type owl:ObjectProperty ;
+        owl:inverseOf :isCopiedBy ;
+        rdfs:domain :Scribe ;
+        rdfs:range :Manuscript ;
+        rdfs:comment "a scribe copied a manuscript" ;
+        rdfs:label "copied" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#describesCollection
+:describesCollection rdf:type owl:ObjectProperty ;
+                     owl:inverseOf :isDescribedByCatalogue ;
+                     rdfs:domain :Catalogue ;
+                     rdfs:range :Collection ;
+                     rdfs:comment "the finding aid (catalogue) describes a collection of manuscripts" ;
+                     rdfs:label "describes collection" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#describesManuscript
+:describesManuscript rdf:type owl:ObjectProperty ;
+                     owl:inverseOf :isDescribedByRecord ;
+                     rdfs:domain :Record ;
+                     rdfs:range :Manuscript ;
+                     rdfs:comment "a record describes a manuscript" ;
+                     rdfs:label "describes manuscript" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasAccessRestriction
+:hasAccessRestriction rdf:type owl:ObjectProperty ;
+                      rdfs:domain [ rdf:type owl:Class ;
+                                    owl:unionOf ( :Collection
+                                                  :Manuscript
+                                                )
+                                  ] ;
+                      rdfs:range :AccessRestriction ;
+                      rdfs:comment "a collection or a manuscript has access restriction" ;
+                      rdfs:label "has access restriction" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasAddress
+:hasAddress rdf:type owl:ObjectProperty ;
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( :Distributor
+                                        :Institution
+                                        :Publisher
+                                      )
+                        ] ;
+            rdfs:range :Address ;
+            rdfs:comment "it is the address of the institution" ;
+            rdfs:label "has address" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasAlternativeIdentifier
+:hasAlternativeIdentifier rdf:type owl:ObjectProperty ;
+                          rdfs:domain :Manuscript ;
+                          rdfs:range :IdentificationInformation ;
+                          rdfs:comment "(alternative identifier) contains an alternative or former structured identifier used for a manuscript, such as a former catalogue number. " ,
+                                       "alternativeIdentifier (other identifier) contains another or former identifier for a manuscript, for example a number previously used in a catalog." ;
+                          rdfs:label "has Alternative Identifier" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasArchRef
+:hasArchRef rdf:type owl:ObjectProperty ;
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( :Fragment
+                                        :RelatedMaterial
+                                      )
+                        ] ;
+            rdfs:range :ArchRef .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasAuthor
+:hasAuthor rdf:type owl:ObjectProperty ;
+           owl:inverseOf :isAuthorOf ;
+           rdfs:domain [ rdf:type owl:Class ;
+                         owl:unionOf ( :Catalogue
+                                       :Manuscript
+                                       :MsItem
+                                     )
+                       ] ;
+           rdfs:range :Author ;
+           rdfs:comment "a catalogue or a manuscript or a manuscript work has an author" ;
+           rdfs:label "has author" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasBibRef
+:hasBibRef rdf:type owl:ObjectProperty ;
+           rdfs:domain :Bibliography ;
+           rdfs:range :BibRef ;
+           rdfs:comment "a bibliography contains one or more bibligraphic references" ;
+           rdfs:label "has bibliographic reference" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasBibliography
+:hasBibliography rdf:type owl:ObjectProperty ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                               owl:unionOf ( :Manuscript
+                                             :Taxonomy
+                                           )
+                             ] ;
+                 rdfs:range :Bibliography ;
+                 rdfs:comment "a manuscript or a taxonomy has a bibliography" ;
+                 rdfs:label "has Bibliography" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasBinding
+:hasBinding rdf:type owl:ObjectProperty ;
+            rdfs:domain :CodicologicalInfo ;
+            rdfs:range :Binding ;
+            rdfs:comment "codicological information include binding" ;
+            rdfs:label "has binding" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasChangeDate
+:hasChangeDate rdf:type owl:ObjectProperty ;
+               rdfs:domain :RevisionDesc ;
+               rdfs:range :Date ;
+               rdfs:comment "it is the date of the change" ;
+               rdfs:label "has change date" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasCodicologicalInfo
+:hasCodicologicalInfo rdf:type owl:ObjectProperty ;
+                      rdfs:domain :Manuscript ;
+                      rdfs:range :CodicologicalInfo ;
+                      rdfs:comment "it contains the description of the physical components of the manuscript" ;
+                      rdfs:label "has Codicological Information" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasConservationInstitution
+:hasConservationInstitution rdf:type owl:ObjectProperty ;
+                            rdfs:domain :Collection ;
+                            rdfs:range :Institution ;
+                            rdfs:comment "a collection is conserved in an institution" ;
+                            rdfs:label "has conservation institution" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasContentItem
+:hasContentItem rdf:type owl:ObjectProperty ;
+                rdfs:domain :Manuscript ;
+                rdfs:range :MsItem ;
+                rdfs:comment "it is for each content item(text) contained in a manuscript" ;
+                rdfs:label "has Content Item" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasContributor
+:hasContributor rdf:type owl:ObjectProperty ;
+                owl:inverseOf :isContributorOf ;
+                rdfs:domain :Manuscript ;
+                rdfs:range :Contributor ;
+                rdfs:comment "a manuscript has a contributor e.g. illustrator, traductor,.." ;
+                rdfs:label "has contributor" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasCreationDate
+:hasCreationDate rdf:type owl:ObjectProperty ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                               owl:unionOf ( :Collection
+                                             :Manuscript
+                                           )
+                             ] ;
+                 rdfs:range :Date ;
+                 rdfs:comment "it is for the creation date of a collection or a manuscript" ;
+                 rdfs:label "has creation Date" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasCreationPlace
+:hasCreationPlace rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Manuscript ;
+                  rdfs:range :Place ;
+                  rdfs:comment "a manuscript is ccreated or copied in a palce" ;
+                  rdfs:label "has Creation Place" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasDecoration
+:hasDecoration rdf:type owl:ObjectProperty ;
+               rdfs:domain :Manuscript ;
+               rdfs:range :Decoration ;
+               rdfs:comment "a manuscript has decorations" ;
+               rdfs:label "has decoration" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasDigitizedVersion
+:hasDigitizedVersion rdf:type owl:ObjectProperty ;
+                     rdfs:domain :Manuscript ;
+                     rdfs:range :DigitizedVersion ;
+                     rdfs:comment "to establish a link to one or more digital representations of the described manuscripts" ;
+                     rdfs:label "has digitized version" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasDimensions
+:hasDimensions rdf:type owl:ObjectProperty ;
+               rdfs:domain [ rdf:type owl:Class ;
+                             owl:unionOf ( :CodicologicalInfo
+                                           :Extent
+                                         )
+                           ] ;
+               rdfs:range :Dimensions ;
+               rdfs:comment "the codicological information of manuscript includes the dimensions of the manuscript or the extent includes the dimensions" ;
+               rdfs:label "has dimensions" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasEncodingDesc
+:hasEncodingDesc rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Record ;
+                 rdfs:range :EncodingDesc ;
+                 rdfs:comment "a manuscript record has encoding description" ;
+                 rdfs:label "has encoding description" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasExplicit
+:hasExplicit rdf:type owl:ObjectProperty ;
+             rdfs:domain :MsItem ;
+             rdfs:range :Explicit ;
+             rdfs:comment "a work has an explicit" ;
+             rdfs:label "has explicit" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasExtent
+:hasExtent rdf:type owl:ObjectProperty ;
+           rdfs:domain :CodicologicalInfo ;
+           rdfs:range :Extent ;
+           rdfs:comment "the codicological description includes extent of the manuscript" ;
+           rdfs:label "has extent" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasFrag
+:hasFrag rdf:type owl:ObjectProperty ;
+         rdfs:domain :Manuscript ;
+         rdfs:range :Fragment ;
+         rdfs:comment "a manuscript has a fragment" ;
+         rdfs:label "has fragment" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasIdentificationInfo
+:hasIdentificationInfo rdf:type owl:ObjectProperty ;
+                       rdfs:domain [ rdf:type owl:Class ;
+                                     owl:unionOf ( :Collection
+                                                   :Manuscript
+                                                 )
+                                   ] ;
+                       rdfs:range :IdentificationInformation ;
+                       rdfs:comment "it is for identification information of a collection or a manuscript" ;
+                       rdfs:label "has identification informations" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasIdentifierInfo
+:hasIdentifierInfo rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Catalogue ;
+                   rdfs:range :CatalogueIdentifier ;
+                   rdfs:comment "The value of the IDENTIFIER attribute must consist of a unique international identifier, either generated by the system (such as an ARK), or entered according to the following structure: FR, followed, where applicable, by the collective catalog identifier and the RCR number of the institution responsible for intellectual access according to the order defined by the collective catalog, and finally a unique identifier." ;
+                   rdfs:label "Identifier" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasIncipit
+:hasIncipit rdf:type owl:ObjectProperty ;
+            rdfs:domain :MsItem ;
+            rdfs:range :Incipit ;
+            rdfs:comment "a work has an incipit" ;
+            rdfs:label "has incipit" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasLangMaterial
+:hasLangMaterial rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Manuscript ;
+                 rdfs:range :Language ;
+                 rdfs:comment "the language in which the manuscript is written with" ;
+                 rdfs:label "has lang material" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasLangUsage
+:hasLangUsage rdf:type owl:ObjectProperty ;
+              rdfs:domain :Catalogue ;
+              rdfs:range :LangUsage ;
+              rdfs:comment "It is used to indicate the language or languages in which the finding aid was written." ;
+              rdfs:label "has language usage" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasLanguage
+:hasLanguage rdf:type owl:ObjectProperty ;
+             rdfs:domain [ rdf:type owl:Class ;
+                           owl:unionOf ( :MsItem
+                                         :Record
+                                       )
+                         ] ;
+             rdfs:range :Language ;
+             rdfs:comment "a record is written in a language e.G. french, english,..." ;
+             rdfs:label "ha language" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasLayout
+:hasLayout rdf:type owl:ObjectProperty ;
+           rdfs:domain :CodicologicalInfo ;
+           rdfs:range :Layout ;
+           rdfs:comment "codicological information includes information about  the layout" ;
+           rdfs:label "has layout" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasLegalStatus
+:hasLegalStatus rdf:type owl:ObjectProperty ;
+                rdfs:domain :AccessRestriction ;
+                rdfs:range :LegalStatus ;
+                rdfs:comment "an access restriction of a manuscript has a leagal status" ;
+                rdfs:label "has leagal status" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasPart
+:hasPart rdf:type owl:ObjectProperty ;
+         rdfs:domain :Manuscript ;
+         rdfs:range :Manuscript ;
+         rdfs:comment "(manuscript part) contains information about an originally distinct manuscript or part of a manuscript, which is now part of a composite manuscript" ;
+         rdfs:label "has part" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasProducer
+:hasProducer rdf:type owl:ObjectProperty ;
+             rdfs:domain :Collection ;
+             rdfs:range :Producer ;
+             rdfs:comment "the producer of the manuscript collection" ;
+             rdfs:label "has producer" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasPublicationInfo
+:hasPublicationInfo rdf:type owl:ObjectProperty ;
+                    rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( :Catalogue
+                                                :Record
+                                              )
+                                ] ;
+                    rdfs:range :PublicationInfo ;
+                    rdfs:comment "a record or a catalogue has a publication information" ;
+                    rdfs:label "has publication information" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasQuire
+:hasQuire rdf:type owl:ObjectProperty ;
+          rdfs:domain :CodicologicalInfo ;
+          rdfs:range :Quire ;
+          rdfs:comment "codicological information includes information about  a quire" ;
+          rdfs:label "has Quire Info" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasRecordCreator
+:hasRecordCreator rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Record ;
+                  rdfs:range :Producer ;
+                  rdfs:comment "a record has a creator" ;
+                  rdfs:label "has record creator" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasRelatedMaterial
+:hasRelatedMaterial rdf:type owl:ObjectProperty ;
+                    rdfs:domain :Manuscript ;
+                    rdfs:range :RelatedMaterial ;
+                    rdfs:comment "a manuscript has a related material" ;
+                    rdfs:label "has Related Material" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasRevisionDesc
+:hasRevisionDesc rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Catalogue ;
+                 rdfs:range :RevisionDesc ;
+                 rdfs:comment "a catalogue has revision description" ;
+                 rdfs:label "has revision description" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasScribe
+:hasScribe rdf:type owl:ObjectProperty ;
+           rdfs:domain :WrittingStyle ;
+           rdfs:range :Scribe ;
+           rdfs:comment "writting style or manuscript has a scribe" ;
+           rdfs:label "has scribe" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasSubject
+:hasSubject rdf:type owl:ObjectProperty ;
+            owl:inverseOf :isSubjectOf ;
+            rdfs:domain :Manuscript ;
+            rdfs:range :Subject ;
+            rdfs:comment "a manuscript has a subject" ;
+            rdfs:label "has subject" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasSupport
+:hasSupport rdf:type owl:ObjectProperty ;
+            rdfs:domain :CodicologicalInfo ;
+            rdfs:range :Support ;
+            rdfs:comment "the codicological description includes support of the manuscript" ;
+            rdfs:label "has support" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasTaxonomy
+:hasTaxonomy rdf:type owl:ObjectProperty ;
+             rdfs:domain :EncodingDesc ;
+             rdfs:range :Taxonomy ;
+             rdfs:comment "the encoding description of a manuscript has taxonomy" ;
+             rdfs:label "has taxonomy" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasWrittingStyle
+:hasWrittingStyle rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Manuscript ;
+                  rdfs:range :WrittingStyle ;
+                  rdfs:comment "a manuscript is written with a writting style" ;
+                  rdfs:label "has Writting Style" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#includes
+:includes rdf:type owl:ObjectProperty ;
+          rdfs:domain :PublicationInfo ;
+          rdfs:range [ rdf:type owl:Class ;
+                       owl:unionOf ( :Date
+                                     :Distributor
+                                     :Publisher
+                                   )
+                     ] ;
+          rdfs:comment "the publication information includes the publisher, the place of publication, .." ;
+          rdfs:label "includes" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#isAuthorOf
+:isAuthorOf rdf:type owl:ObjectProperty ;
+            rdfs:comment "an entity is author of a manuscript" ;
+            rdfs:label "is author of" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#isConservatingInstitutionOf
+:isConservatingInstitutionOf rdf:type owl:ObjectProperty ;
+                             owl:inverseOf :isConservedInInstitution ;
+                             rdfs:comment "it is the conservating institution of a manuscript" ;
+                             rdfs:label "is the conservating institution of" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#isConservedInCity
+:isConservedInCity rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Manuscript ;
+                   rdfs:range :City ;
+                   rdfs:comment "the city where the manuscript is conserved" ;
+                   rdfs:label "is Conserved In City" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#isConservedInInstitution
+:isConservedInInstitution rdf:type owl:ObjectProperty ;
+                          rdfs:domain :Manuscript ;
+                          rdfs:range :Institution ;
+                          rdfs:comment "The institution or repository that holds the manuscript or where it is available." ;
+                          rdfs:label "is Conserved In Institution" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#isContainedInCatalogue
+:isContainedInCatalogue rdf:type owl:ObjectProperty ;
+                        rdfs:comment "a record is contained in a catalogue" ;
+                        rdfs:label "is contained in a catalogue" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#isContainedInCollection
+:isContainedInCollection rdf:type owl:ObjectProperty ;
+                         rdfs:comment "a manuscript belongs to a collection" ;
+                         rdfs:label "is contained in collection" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#isContributorOf
+:isContributorOf rdf:type owl:ObjectProperty ;
+                 rdfs:comment "it is the contributor of the manuscript" ;
+                 rdfs:label "is contributor of" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#isCopiedBy
+:isCopiedBy rdf:type owl:ObjectProperty ;
+            rdfs:comment "a manuscript is copied by a scribe" ;
+            rdfs:label "is copied by" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#isDescribedByCatalogue
+:isDescribedByCatalogue rdf:type owl:ObjectProperty ;
+                        rdfs:comment "a collection is described by a catalogue following an encoding standard" ;
+                        rdfs:label "is described by a catalogue" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#isDescribedByRecord
+:isDescribedByRecord rdf:type owl:ObjectProperty ;
+                     rdfs:comment "a manuscript is described by a record" ;
+                     rdfs:label "is described by record" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#isSubjectOf
+:isSubjectOf rdf:type owl:ObjectProperty ;
+             rdfs:comment "a subject is a subject of a manuscript" ;
+             rdfs:label "is subject of" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#usesLanguage
+:usesLanguage rdf:type owl:ObjectProperty ;
+              rdfs:domain :LangUsage ;
+              rdfs:range :Language ;
+              rdfs:comment "it is the used language" ;
+              rdfs:label "uses language" .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#HowShelved
+:HowShelved rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Institution ;
+            rdfs:range xsd:string ;
+            rdfs:comment "refers to the system used to shelve a bibliographic item in the collections of the reporting organization for example shelved by title." ;
+            rdfs:label "How Shelved" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasAbstract
+:hasAbstract rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Manuscript ;
+             rdfs:range xsd:string ;
+             rdfs:comment "contains the text of the abstract or summary, the analytical summary, or an expanded version of the abstract" ;
+             rdfs:label "has Abstract" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasAccMat
+:hasAccMat rdf:type owl:DatatypeProperty ;
+           rdfs:domain :CodicologicalInfo ;
+           rdfs:range xsd:string ;
+           rdfs:comment "(accompanying material) gives details of any accompanying material closely associated with the manuscript, such as non-contemporary documents or fragments related to the manuscript at an earlier time (Related but not original material)." ;
+           rdfs:label "has accompanying material" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasAccessMethod
+:hasAccessMethod rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :DigitizedVersion ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "Access method to the electronic resource.The methods defined are the main TCP/IP (Transmission Control Protocol/Internet Protocol) protocols." ;
+                 rdfs:label "has Access Method" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasAccruals
+:hasAccruals rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Manuscript ;
+             rdfs:range xsd:string ;
+             rdfs:comment "This is for information regarding planned enhancements to the manuscript." ;
+             rdfs:label "has Accruals" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasAcqInfo
+:hasAcqInfo rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Manuscript ;
+            rdfs:range xsd:string ;
+            rdfs:comment "This concerns information relating to how documentary units entered the preservation institution. That is to say, how the manuscript was acquired by the institution, for example, through a donation, purchase, bequest, deposit, administrative transfer, date of entry, previous owner, administrative provenance, etc." ;
+            rdfs:label "has Acquisition Information" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasAddressLine
+:hasAddressLine rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Address ;
+                rdfs:range xsd:string ;
+                rdfs:comment "contains a postal address line." ;
+                rdfs:label "has address Line" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasAffiliation
+:hasAffiliation rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Person ;
+                rdfs:range xsd:string ;
+                rdfs:comment "The name of an organization, institution, etc. with which the entity was associated at the time that the resource was created." ;
+                rdfs:label "has affiliation" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasAlphabet
+:hasAlphabet rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Language ;
+             rdfs:range xsd:string ;
+             rdfs:comment "Specifies the alphabet, script, or notation system that is used in the resource. This includes specialized scripts, typefaces, or codes (e.g., Arabic alphabet, Arabic numerals, ASCII, bar code, BCD, braille, ciphers, Cyrillic alphabet, EBCDIC, Fraktur, Greek alphabet, Hebrew alphabet, hieroglyphics, pictograms, Roman alphabet, Roman numerals, or logarithmic or semilogarithmic graphing, etc.)." ;
+             rdfs:label "has Alphabet" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasAlternativeForm
+:hasAlternativeForm rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Manuscript ;
+                    rdfs:range xsd:string ;
+                    rdfs:comment "It serves to indicate that there are other forms, versions or media of the same document, for example: a digitization of the manuscript, a microfilm copy, a printed edition, a transcription, a translation, a photographic reproduction." ;
+                    rdfs:label "has Alternative Form" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasAlternativeName
+:hasAlternativeName rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Manuscript ;
+                    rdfs:range xsd:string ;
+                    rdfs:comment "it is an alternative title which is a varying form of the title" ;
+                    rdfs:label "has Alternative Name" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasAngleAlef
+:hasAngleAlef rdf:type owl:DatatypeProperty ;
+              rdfs:domain :WrittingStyle ;
+              rdfs:range xsd:float ;
+              rdfs:comment "This is the angle of inclination of the letter alif" ;
+              rdfs:label "has Angle Alef" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasAngleKaf
+:hasAngleKaf rdf:type owl:DatatypeProperty ;
+             rdfs:domain :WrittingStyle ;
+             rdfs:range xsd:float ;
+             rdfs:comment "This is the angle of inclination of the letter kaf" ;
+             rdfs:label "has Angle Kaf" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasAppraisal
+:hasAppraisal rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Manuscript ;
+              rdfs:range xsd:string ;
+              rdfs:comment "This is for information relating to any sorting and disposal carried out by the conservation institution." ;
+              rdfs:label "has appraisal" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasArchRefValue
+:hasArchRefValue rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :ArchRef ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "This is a reference to an external archival reference to other documents described online, here to separate documents" ;
+                 rdfs:label "has Arch Reference" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasArrangement
+:hasArrangement rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Manuscript ;
+                rdfs:range xsd:string ;
+                rdfs:comment "This is for all information about the structure, order, or classification plan of the description unit." ;
+                rdfs:label "has Arrangement" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasAuthefilNumber
+:hasAuthefilNumber rdf:type owl:DatatypeProperty ;
+                   rdfs:domain [ rdf:type owl:Class ;
+                                 owl:unionOf ( :Institution
+                                               :Person
+                                               :Place
+                                               :Subject
+                                             )
+                               ] ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "Unique identifier of the institution within the authority file" ;
+                   rdfs:label "has authfil number" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasAuthority
+:hasAuthority rdf:type owl:DatatypeProperty ;
+              rdfs:domain [ rdf:type owl:Class ;
+                            owl:unionOf ( :Institution
+                                          :Person
+                                          :Subject
+                                        )
+                          ] ;
+              rdfs:range xsd:string ;
+              rdfs:comment "Indicates the authority file used" ,
+                           "it indicates the source of the controlled vocabulary used for the subject heading for example lcsh, RVM, CSH,.." ;
+              rdfs:label "has Authority" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasAuthorizedUsers
+:hasAuthorizedUsers rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :AccessRestriction ;
+                    rdfs:range xsd:string ;
+                    rdfs:comment "Class of users or specific individuals (by name or title) to whom the restrictions do not apply." ;
+                    rdfs:label "has Authorized Users" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasAvailabilityDate
+:hasAvailabilityDate rdf:type owl:DatatypeProperty ;
+                     rdfs:domain :AccessRestriction ;
+                     rdfs:range xsd:date ;
+                     rdfs:comment "Date when the resource changes its access status, e.g., when it becomes freely available. Preferred structure for the date is according to Date and Time (ISO 8601): yyyymmdd." ;
+                     rdfs:label "has Availability Date" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasBibRefValue
+:hasBibRefValue rdf:type owl:DatatypeProperty ;
+                rdfs:domain :BibRef ;
+                rdfs:range xsd:string ;
+                rdfs:comment "it is the name of the bibliographic reference" ;
+                rdfs:label "has bibliographic reference" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasBindingInfo
+:hasBindingInfo rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Binding ;
+                rdfs:range xsd:string ;
+                rdfs:comment "it is an abstract of the binding in the form of a paragraph" ;
+                rdfs:label "has Binding Information" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasBioghist
+:hasBioghist rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Manuscript ;
+             rdfs:range xsd:string ;
+             rdfs:comment "This is for the information relating to the producer of the collections (individual, family, or community) necessary for a proper understanding of the documents described." ;
+             rdfs:label "has bioghist" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasBoard
+:hasBoard rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Binding ;
+          rdfs:range xsd:string ;
+          rdfs:comment "it is the board contained in the cover. The board = the “flat” of the book: The solid piece found at the front and back, onto which the leather or parchment that covers the binding is glued; ; it can be made of wood or cardboard." ;
+          rdfs:label "has Board" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasCalendar
+:hasCalendar rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Date ;
+             rdfs:range [ rdf:type rdfs:Datatype ;
+                          owl:unionOf ( xsd:NMTOKEN
+                                        [ rdf:type rdfs:Datatype ;
+                                          owl:oneOf [ rdf:type rdf:List ;
+                                                      rdf:first "chinese" ;
+                                                      rdf:rest [ rdf:type rdf:List ;
+                                                                 rdf:first "gregorian" ;
+                                                                 rdf:rest [ rdf:type rdf:List ;
+                                                                            rdf:first "hebrew" ;
+                                                                            rdf:rest [ rdf:type rdf:List ;
+                                                                                       rdf:first "islamic" ;
+                                                                                       rdf:rest [ rdf:type rdf:List ;
+                                                                                                  rdf:first "julian" ;
+                                                                                                  rdf:rest [ rdf:type rdf:List ;
+                                                                                                             rdf:first "revolutionnaire" ;
+                                                                                                             rdf:rest rdf:nil
+                                                                                                           ]
+                                                                                                ]
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                        ]
+                                      )
+                        ] ;
+             rdfs:comment "the used calendar" ;
+             rdfs:label "has calendar" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasCatchWords
+:hasCatchWords rdf:type owl:DatatypeProperty ;
+               rdfs:domain :CodicologicalInfo ;
+               rdfs:range xsd:string ;
+               rdfs:comment "it describes the system used to ensure correct ordering of the quires or similar making up a codex, incunable, or other object typically by means of annotations at the foot of the page." ;
+               rdfs:label "has catch words" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasChangeItem
+:hasChangeItem rdf:type owl:DatatypeProperty ;
+               rdfs:domain :RevisionDesc ;
+               rdfs:range xsd:string ;
+               rdfs:comment "it describes the nature of the changes." ;
+               rdfs:label "has change item" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasColophon
+:hasColophon rdf:type owl:DatatypeProperty ;
+             rdfs:domain :MsItem ;
+             rdfs:range xsd:string ;
+             rdfs:comment "contains the colophon of an item: that is, a statement providing information regarding the date, place, agency, or reason for production of the manuscript" ;
+             rdfs:label "has colophon" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasColorContent
+:hasColorContent rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Support ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "Color characteristics of the content of a resource. Achromatic values (white, gray, and black) are considered to be colors." ;
+                 rdfs:label "has Color Content" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasColumns
+:hasColumns rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Layout ;
+            rdfs:range xsd:int ;
+            rdfs:comment "specifies the number of columns present on a page" ;
+            rdfs:label "has Columns" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasConditioning
+:hasConditioning rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :CodicologicalInfo ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "It is for the packaging (conditionning) carried out before the manuscript entered the conservation institution." ;
+                 rdfs:label "has Conditioning" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasCorporateNameType
+:hasCorporateNameType rdf:type owl:DatatypeProperty ;
+                      rdfs:domain :CorporateSubject ;
+                      rdfs:range xsd:string ;
+                      rdfs:comment "This type of community name entry has three values: 0: Inverted name; 1: Jurisdiction name; 2: Name in direct order" ;
+                      rdfs:label "has Corporate Name Type" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasCountryCode
+:hasCountryCode rdf:type owl:DatatypeProperty ;
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( :CatalogueIdentifier
+                                            :Institution
+                                          )
+                            ] ;
+                rdfs:range xsd:string ;
+                rdfs:comment "Country code of the producing institution" ,
+                             "contains a two- or three-character country code used to designate the primary location identifier" ;
+                rdfs:label "Country Code" ,
+                           "has Country Code" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasCountryEncoding
+:hasCountryEncoding rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Catalogue ;
+                    rdfs:range xsd:NMTOKEN ;
+                    rdfs:comment "it Indicates the country of the institution producing the file (e.g., FR for France, US for United States)" ;
+                    rdfs:label "has country encoding" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasCover
+:hasCover rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Binding ;
+          rdfs:range xsd:string ;
+          rdfs:comment "it is the cover of the manuscript" ;
+          rdfs:label "has Cover" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasCoverage
+:hasCoverage rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Manuscript ;
+             rdfs:range xsd:string ;
+             rdfs:comment "Spatiotemporal scope or coverage of the manuscript" ;
+             rdfs:label "has Coverage" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasCreationInfo
+:hasCreationInfo rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Catalogue ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "This is for information on the initial encoding of the finding aid; it must always specify: the format version and the possible use of a schema; the cataloging tool, in the case of ongoing cataloging; the details of any conversion (source, format, service provider, etc.) and may also mention the name of the encoder and the date of encoding." ;
+                 rdfs:label "has creation information" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasDate
+:hasDate rdf:type owl:DatatypeProperty ;
+         rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( :Institution
+                                     :Person
+                                     :PersonSubject
+                                   )
+                     ] ;
+         rdfs:range xsd:dateTime ;
+         rdfs:comment "Used to parse a date (for example a birth date) included for the purpose of distinguishing individuals with the same name." ;
+         rdfs:label "has date" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasDateCreation
+:hasDateCreation rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Record ;
+                 rdfs:range xsd:date ;
+                 rdfs:comment "The date or date and time when the original record was first created." ;
+                 rdfs:label "has creation date" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasDateEncoding
+:hasDateEncoding rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Catalogue ;
+                 rdfs:range xsd:NMTOKEN ;
+                 rdfs:comment "Standard format for dates (e.g., 2025-12-15 for December 15, 2025)" ;
+                 rdfs:label "has date encoding" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasDateValue
+:hasDateValue rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Date ;
+              rdfs:range xsd:dateTime ;
+              rdfs:comment "it is the value of the data elemnt which is a text" ;
+              rdfs:label "has date value" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasDecorationInfo
+:hasDecorationInfo rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :Decoration ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "It contains description informations of the decoration of a manuscript" ;
+                   rdfs:label "has Decoration Information" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasDecorationNote
+:hasDecorationNote rdf:type owl:DatatypeProperty ;
+                   rdfs:domain [ rdf:type owl:Class ;
+                                 owl:unionOf ( :Binding
+                                               :Decoration
+                                             )
+                               ] ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "it is used to describe the decorative elements associated with the book binding." ;
+                   rdfs:label "has Decoration Note" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasDensity
+:hasDensity rdf:type owl:DatatypeProperty ;
+            rdfs:domain :WrittingStyle ;
+            rdfs:range xsd:string ;
+            rdfs:comment "The number of letters written over a given distance. That is to say, how close the writing is, and high density = very close writing." ;
+            rdfs:label "has Density" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasDescription
+:hasDescription rdf:type owl:DatatypeProperty ;
+                rdfs:domain :DigitizedVersion ;
+                rdfs:range xsd:string ;
+                rdfs:comment "it is the description of the digital ressource. In mods, It indicates how the document attained its digital form; its possible values ​​are: born digital: the resource was born digital and will remain digital; reformatted digital: an original analog document was directly digitized; digitized microfilm: the file comes from the digitization of a microfilm, itself an analog copy; digitized other analog: the resource comes from the digitization of a secondary analog copy." ;
+                rdfs:label "has description" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasDescriptionRules
+:hasDescriptionRules rdf:type owl:DatatypeProperty ;
+                     rdfs:domain :Record ;
+                     rdfs:range xsd:string ;
+                     rdfs:comment "Designates the rules used for the content of the description, it is the code for or the title of the description rules used in creating the record. The subfield may also be used to record the use of AACR 2-based manuals." ;
+                     rdfs:label "has description rules" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasDiameter
+:hasDiameter rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Dimensions ;
+             rdfs:range xsd:string ;
+             rdfs:comment "the diameter dimension" ;
+             rdfs:label "has diameter" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasDimensionsInfo
+:hasDimensionsInfo rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :Dimensions ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "the textual value of dimensions Tag (often after folding, binding, etc.)." ;
+                   rdfs:label "has dimensions info" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasDocumentType
+:hasDocumentType rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Manuscript ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "It is used to describe the type or form of a resource. This is for the type of resource to be described, Nature or genre of the resource content e.g. handwritten text." ;
+                 rdfs:label "has document type" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasEmail
+:hasEmail rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Distributor ;
+          rdfs:range xsd:string ;
+          rdfs:comment "it the email of an entity" ;
+          rdfs:label "has email" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasEncodingAnalog
+:hasEncodingAnalog rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :CatalogueIdentifier ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "Indicates the equivalence with another metadata standard (dc, marc, etc." ;
+                   rdfs:label "has encoding analog" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasEra
+:hasEra rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Date ;
+        rdfs:range [ rdf:type rdfs:Datatype ;
+                     owl:unionOf ( xsd:NMTOKEN
+                                   [ rdf:type rdfs:Datatype ;
+                                     owl:oneOf [ rdf:type rdf:List ;
+                                                 rdf:first "ce" ;
+                                                 rdf:rest rdf:nil
+                                               ]
+                                   ]
+                                 )
+                   ] ;
+        rdfs:comment "The era attribute is for the corresponding era in a calendar. Most of the time, the values calendar=\"gregorian\" and era=\"ce\" (Common Era of the Gregorian calendar) are used." ;
+        rdfs:label "era" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasExplicitText
+:hasExplicitText rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Explicit ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "it is the text of the explicit" ;
+                 rdfs:label "has explicit text" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasExtentInfo
+:hasExtentInfo rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Extent ;
+               rdfs:range xsd:string ;
+               rdfs:comment "it is the textual value of extent" ;
+               rdfs:label "has Extent Information" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasFileName
+:hasFileName rdf:type owl:DatatypeProperty ;
+             rdfs:domain :CatalogueIdentifier ;
+             rdfs:range xsd:string ;
+             rdfs:comment "File name describing the catalogue" ;
+             rdfs:label "has file name" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasFindAidStatus
+:hasFindAidStatus rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Catalogue ;
+                  rdfs:range xsd:NMTOKEN ;
+                  rdfs:comment "It indicates the status of the finding aid or catalog, for example: incomplete or provisional." ;
+                  rdfs:label "has find aid status" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasFirstName
+:hasFirstName rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Person ;
+              rdfs:range xsd:string ;
+              rdfs:comment "it is the first name of the person" ;
+              rdfs:label "has first name" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasFoldingFormat
+:hasFoldingFormat rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Support ;
+                  rdfs:range xsd:string ;
+                  rdfs:comment "The result of folding a printed sheet to form a gathering of leaves (e.g., a sheet folded once to form a folio, twice to form a quarto, three times to form an octavo)." ;
+                  rdfs:label "has Folding Format" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasFoliation
+:hasFoliation rdf:type owl:DatatypeProperty ;
+              rdfs:domain :CodicologicalInfo ;
+              rdfs:range xsd:string ;
+              rdfs:comment "it describes the numbering system or systems (numerotation) used to count the leaves or pages in a codex or similar object" ;
+              rdfs:label "has foliation" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasFragmentInfo
+:hasFragmentInfo rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Fragment ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "it gives information about the Separate documents" ;
+                 rdfs:label "has Fragment Information" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasFunction
+:hasFunction rdf:type owl:DatatypeProperty ;
+             rdfs:domain [ rdf:type owl:Class ;
+                           owl:unionOf ( :Institution
+                                         :Producer
+                                       )
+                         ] ;
+             rdfs:range xsd:string ;
+             rdfs:comment "it is the role played by a person or institution e.g: producer,author,.." ;
+             rdfs:label "has function" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasGeneration
+:hasGeneration rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Support ;
+               rdfs:range xsd:string ;
+               rdfs:comment "for the The relationship between an original carrier and the carrier of a reproduction made from the original (e.g., a first generation camera master, a second generation printing master). It indicates whether the medium is original or a reproduction, for example original: the medium is the original written or created by the copyist; print master or other: the record describes a copy or reproduction (for example a facsimile, microfilm, or print)." ;
+               rdfs:label "has Generation" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasGenre
+:hasGenre rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Subject ;
+          rdfs:range xsd:string ;
+          rdfs:comment "it explains what form the documents on this subject take" ;
+          rdfs:label "has genre" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasGeographic
+:hasGeographic rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Subject ;
+               rdfs:range xsd:string ;
+               rdfs:comment "Indicates the geographical location to which the subject is attached. It answers the question: \"Where?\"" ;
+               rdfs:label "has Geographic" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasGraphic
+:hasGraphic rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Image ;
+            rdfs:range xsd:anyURI ;
+            rdfs:comment "(graphic) indicates the location of an embedded image, illustration, or diagram." ;
+            rdfs:label "has graphic" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasHeight
+:hasHeight rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Dimensions ;
+           rdfs:range xsd:string ;
+           rdfs:comment "the height dimension" ;
+           rdfs:label "has height" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasID
+:hasID rdf:type owl:DatatypeProperty ;
+       rdfs:domain [ rdf:type owl:Class ;
+                     owl:unionOf ( :IdentificationInformation
+                                   :Taxonomy
+                                 )
+                   ] ;
+       rdfs:range xsd:string ;
+       rdfs:comment "it is for the id value" ;
+       rdfs:label "has identifier" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasIdentifier
+:hasIdentifier rdf:type owl:DatatypeProperty ;
+               rdfs:domain :CatalogueIdentifier ;
+               rdfs:range xsd:string ;
+               rdfs:comment "gives a unique identifier to the file describing the catalogue" ;
+               rdfs:label "has identifier" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasIncipitText
+:hasIncipitText rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Incipit ;
+                rdfs:range xsd:string ;
+                rdfs:comment "it is the text of the incipit" ;
+                rdfs:label "has incipit text" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasInk
+:hasInk rdf:type owl:DatatypeProperty ;
+        rdfs:domain :WrittingStyle ;
+        rdfs:range xsd:string ;
+        rdfs:comment "describes the shade or type of ink, for example brown, or other writing tool, for example a pencil." ;
+        rdfs:label "has Ink" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasJurisdiction
+:hasJurisdiction rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :AccessRestriction ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "The name of the person, institution, or institutional role responsible for imposing and/or enforcing access conditions, and to whom requests or appeals regarding these restrictions may be addressed." ;
+                 rdfs:label "has Jurisdiction" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasKey
+:hasKey rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Place ;
+        rdfs:range xsd:string ;
+        rdfs:comment "the key code of the country, for example: for Danemark, its key code: DK" ;
+        rdfs:label "has key" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasKuniya
+:hasKuniya rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Person ;
+           rdfs:range xsd:string ;
+           rdfs:comment "contains an additional name component, such as a nickname, epithet, or alias, or any other descriptive phrase used within a personal name." ;
+           rdfs:label "has kuniya" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasLangCode
+:hasLangCode rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Language ;
+             rdfs:range xsd:string ;
+             rdfs:comment "​​provides a language code" ;
+             rdfs:label "has lang code" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasLangEncoding
+:hasLangEncoding rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Catalogue ;
+                 rdfs:range xsd:NMTOKEN ;
+                 rdfs:comment "Code for the main language of the EAD file (e.g., lat = Latin, eng = English)" ;
+                 rdfs:label "has lang encoding" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasLangUsageValue
+:hasLangUsageValue rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :LangUsage ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "the lang usage value" ;
+                   rdfs:label "has lang usage" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasLanguageName
+:hasLanguageName rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Language ;
+                 rdfs:range xsd:language ;
+                 rdfs:comment "it is the used language" ;
+                 rdfs:label "has language" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasLanguageOfCataloging
+:hasLanguageOfCataloging rdf:type owl:DatatypeProperty ;
+                         rdfs:domain :Record ;
+                         rdfs:range xsd:language ;
+                         rdfs:comment "The language of the text of the record. it Contains the language(s) of the metadata record." ;
+                         rdfs:label "has cataloguing language" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasLastName
+:hasLastName rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Person ;
+             rdfs:range xsd:string ;
+             rdfs:comment "it is the last name of a person" ;
+             rdfs:label "has last name" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasLayoutInfo
+:hasLayoutInfo rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Layout ;
+               rdfs:range xsd:string ;
+               rdfs:comment "it is for the arrangement of text, it is the value of the layout element" ;
+               rdfs:label "has Layout Information" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasLayoutTool
+:hasLayoutTool rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Layout ;
+               rdfs:range xsd:string ;
+               rdfs:comment "it specifies the tool used for the layout" ;
+               rdfs:label "has Layout Tool" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasLegalAuthority
+:hasLegalAuthority rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :AccessRestriction ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "The law or legal authority that imposes the restriction. It specifies the rule on which access is limited, for example, Article 35 of the French Archives Law. This means that access is limited by French law." ;
+                   rdfs:label "has Legal Authority" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasLegalStatusInfo
+:hasLegalStatusInfo rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :LegalStatus ;
+                    rdfs:range xsd:string ;
+                    rdfs:comment "It indicates, using standardized textual values, whether the described document is considered patrimonial or non-patrimonial)." ;
+                    rdfs:label "has legal status informations" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasLength
+:hasLength rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Dimensions ;
+           rdfs:range xsd:string ;
+           rdfs:comment "the length dimension" ;
+           rdfs:label "has length" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasLineHeight
+:hasLineHeight rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Layout ;
+               rdfs:range xsd:string ;
+               rdfs:comment "it specifies the height of lines" ;
+               rdfs:label "has Line Height" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasLink
+:hasLink rdf:type owl:DatatypeProperty ;
+         rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( :ArchRef
+                                     :BibRef
+                                     :DigitizedVersion
+                                   )
+                     ] ;
+         rdfs:range xsd:anyURI ;
+         rdfs:comment "it is the link to the digitized manuscript, or to a bibliographic reference" ;
+         rdfs:label "has Link" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasLinkTitle
+:hasLinkTitle rdf:type owl:DatatypeProperty ;
+              rdfs:domain :DigitizedVersion ;
+              rdfs:range xsd:string ;
+              rdfs:comment "the title of the link as text" ;
+              rdfs:label "has Link Title" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasLocus
+:hasLocus rdf:type owl:DatatypeProperty ;
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( :Explicit
+                                      :Incipit
+                                      :Layout
+                                      :MsItem
+                                    )
+                      ] ;
+          rdfs:range xsd:string ;
+          rdfs:comment "defines a location within a manuscript, manuscript part, typically as a (possibly discontinuous) sequence of folio references" ;
+          rdfs:label "has locus" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasMainAgencyCode
+:hasMainAgencyCode rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :CatalogueIdentifier ;
+                   rdfs:range xsd:NMTOKEN ;
+                   rdfs:comment "It indicates the institution responsible for publishing the catalogue." ;
+                   rdfs:label "main agency code" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasMarginalAdditions
+:hasMarginalAdditions rdf:type owl:DatatypeProperty ;
+                      rdfs:domain :Manuscript ;
+                      rdfs:range xsd:string ;
+                      rdfs:comment "contains a description of significant additions found in a manuscript, such as marginal glosses or other annotations. it refers to textual or figurative elements present in the margins of the described manuscript and related to its content. These elements may be contemporary with or later than the document's production." ;
+                      rdfs:label "has Marginal Additions" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasMaterial
+:hasMaterial rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Support ;
+             rdfs:range xsd:string ;
+             rdfs:comment "It describes the material or materials used to produce a manuscript. that is to say, the material that was primarily used to make the support. It is a particular material for a component or element of the support (ribbon, binding, ornament…). Or used for a short project-defined name for the material composing the majority of the support." ;
+             rdfs:label "has material" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasMedia
+:hasMedia rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Support ;
+          rdfs:range xsd:string ;
+          rdfs:comment "Describes the medium, that is, the material or substance applied to the support: ink, paint, gold leaf,  to create the text or decoration." ;
+          rdfs:label "has Media" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasMediaType
+:hasMediaType rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Manuscript ;
+              rdfs:range xsd:string ;
+              rdfs:comment "Media type reflects the general type of intermediation device required to view, play, run, etc., the content of a manuscript" ;
+              rdfs:label "has Media Type" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasMsItemID
+:hasMsItemID rdf:type owl:DatatypeProperty ;
+             rdfs:domain :MsItem ;
+             rdfs:range xsd:string ;
+             rdfs:comment "it is the ID of the manuscript item" ;
+             rdfs:label "has MsItem ID" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasName
+:hasName rdf:type owl:DatatypeProperty ;
+         rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( :Contributor
+                                     :Distributor
+                                     :Institution
+                                     :Person
+                                     :Producer
+                                     :Publisher
+                                     :Subject
+                                   )
+                     ] ;
+         rdfs:range xsd:string ;
+         rdfs:comment "it is the full name of an entity e.g: institution, person,.." ;
+         rdfs:label "has Name" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasNameTranscription
+:hasNameTranscription rdf:type owl:DatatypeProperty ;
+                      rdfs:domain :Person ;
+                      rdfs:range xsd:string ;
+                      rdfs:comment "the Transcription of the name" ;
+                      rdfs:label "has Name Transcription" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasNormalizedDate
+:hasNormalizedDate rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :Date ;
+                   rdfs:range xsd:date ;
+                   rdfs:comment "NormalizedDate is used for indexing and search purposes. Regardless of the values entered in CALENDAR and ERA, this date is always expressed according to the extended ISO 8601 standard (i.e., in the Gregorian calendar), using dashes or not depending on the tool used: YYYYMMDD/YYYYMMDD or YYYY-MM-DD/YYYY-MM-DD." ;
+                   rdfs:label "has normalized date" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasNormalizedName
+:hasNormalizedName rdf:type owl:DatatypeProperty ;
+                   rdfs:domain [ rdf:type owl:Class ;
+                                 owl:unionOf ( :Institution
+                                               :Person
+                                               :Place
+                                             )
+                               ] ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "it is for the normalized version of the name" ;
+                   rdfs:label "has normalized name" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasNormalizedTopic
+:hasNormalizedTopic rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Subject ;
+                    rdfs:range xsd:string ;
+                    rdfs:comment "to give a standardized form of the topic name" ;
+                    rdfs:label "has Normalized Topic" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasNote
+:hasNote rdf:type owl:DatatypeProperty ;
+         rdfs:domain :IdentificationInformation ;
+         rdfs:range xsd:string ;
+         rdfs:comment "a note that explains the alternatif identifier" ;
+         rdfs:label "has note" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasNumber
+:hasNumber rdf:type owl:DatatypeProperty ;
+           rdfs:domain :MsItem ;
+           rdfs:range xsd:int ;
+           rdfs:comment "it is used to number or label an msItem according to its order within the manuscript" ;
+           rdfs:label "has ordinal number" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasOrigin
+:hasOrigin rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Record ;
+           rdfs:range xsd:string ;
+           rdfs:comment "Shows the origin or provenance of the record." ;
+           rdfs:label "has origin" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasOriginalDimensions
+:hasOriginalDimensions rdf:type owl:DatatypeProperty ;
+                       rdfs:domain :Support ;
+                       rdfs:range xsd:string ;
+                       rdfs:comment "This is the dimension of the original parchment/scroll before folding and binding" ,
+                                    "an extent or codicological information has dimensions" ;
+                       rdfs:label "has dimensions" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasOriginalLanguage
+:hasOriginalLanguage rdf:type owl:DatatypeProperty ;
+                     rdfs:domain :Language ;
+                     rdfs:range xsd:string ;
+                     rdfs:comment "if it is a translation, we put the language code of the original language of the document." ;
+                     rdfs:label "has Original Language" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasOriginalLocation
+:hasOriginalLocation rdf:type owl:DatatypeProperty ;
+                     rdfs:domain :Manuscript ;
+                     rdfs:range xsd:string ;
+                     rdfs:comment "provides information on the original document when the notice describes a reproduction, allowing you to know where the original is located and how to identify it. It is used when the document you are describing is not the original, but a reproduction" ;
+                     rdfs:label "has Original Location" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasPhysicalAccessProvisions
+:hasPhysicalAccessProvisions rdf:type owl:DatatypeProperty ;
+                             rdfs:domain :AccessRestriction ;
+                             rdfs:range xsd:string ;
+                             rdfs:comment "Arrangements required for physical access. Such arrangements may change from time to time." ;
+                             rdfs:label "has Physical Access Provisions" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasPhysicalLocation
+:hasPhysicalLocation rdf:type owl:DatatypeProperty ;
+                     rdfs:domain [ rdf:type owl:Class ;
+                                   owl:unionOf ( :Collection
+                                                 :Manuscript
+                                               )
+                                 ] ;
+                     rdfs:range [ rdf:type rdfs:Datatype ;
+                                  owl:unionOf ( xsd:anyURI
+                                                xsd:string
+                                              )
+                                ] ;
+                     rdfs:comment """Information allowing the identification of the place where the described manuscripts are stored.
+
+This may include, for example, the indication that a collection is deposited in another institution, the name or number of a building or storage area, or any other physical location detail, particularly when this location affects access.""" ;
+                     rdfs:label "has pysical Location" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasPostCode
+:hasPostCode rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Address ;
+             rdfs:range xsd:string ;
+             rdfs:comment "contains a numeric or alphanumeric code that forms part of the postal address and is used to simplify the sorting or distribution of mail." ;
+             rdfs:label "has post code" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasPreferredCitation
+:hasPreferredCitation rdf:type owl:DatatypeProperty ;
+                      rdfs:domain :Collection ;
+                      rdfs:range xsd:string ;
+                      rdfs:comment "To provide information on the form to be used when citing the described collection. This element is particularly useful in the description of the collection but may also be used within the Component element (a manuscript)." ;
+                      rdfs:label "has preferred citation" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasProcessInfo
+:hasProcessInfo rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Manuscript ;
+                rdfs:range xsd:string ;
+                rdfs:comment "To make information on the processing of documentary units and the control of their descriptions accessible to the public. This information may relate to: updates to the format of digital documents to ensure their accessibility;preservation treatments carried out (disinfection, cleaning, dusting);the management of accessions and the cataloging of documents;the control of descriptions (information on the creation and revision of the record description)." ;
+                rdfs:label "has process information" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasProductionTechnique
+:hasProductionTechnique rdf:type owl:DatatypeProperty ;
+                        rdfs:domain :CodicologicalInfo ;
+                        rdfs:range xsd:string ;
+                        rdfs:comment "for the technique used for the creation of the manuscript, that is to say, how the object was made." ;
+                        rdfs:label "has Production Technique" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasProjectDesc
+:hasProjectDesc rdf:type owl:DatatypeProperty ;
+                rdfs:domain :EncodingDesc ;
+                rdfs:range xsd:string ;
+                rdfs:comment "describes in detail the purpose or objective of encoding an electronic file, as well as any other relevant information about how it was constructed or collected." ;
+                rdfs:label "has project description" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasProvenance
+:hasProvenance rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Manuscript ;
+               rdfs:range xsd:string ;
+               rdfs:comment "It describes its previous history, that is to say, all the stages in the manuscript's life after its creation but before its final acquisition by the current institution." ;
+               rdfs:label "has provenance" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasPubPlace
+:hasPubPlace rdf:type owl:DatatypeProperty ;
+             rdfs:domain :PublicationInfo ;
+             rdfs:range xsd:string ;
+             rdfs:comment "A place associated with the publication event." ;
+             rdfs:label "has publication place" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasPublisher
+:hasPublisher rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Catalogue ;
+              rdfs:range xsd:string ;
+              rdfs:comment "The name of the entity that published  the resource." ;
+              rdfs:label "has publisher" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasQuireInfo
+:hasQuireInfo rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Quire ;
+              rdfs:range xsd:string ;
+              rdfs:comment "the informations of the quire or the quires of the manuscript" ;
+              rdfs:label "has Quire Info" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasRatio
+:hasRatio rdf:type owl:DatatypeProperty ;
+          rdfs:domain :WrittingStyle ;
+          rdfs:range xsd:string ;
+          rdfs:comment "This corresponds to the ratio between the height and width of the letters to analyze the proportion and elegance of the calligraphic style, for example: 1:1 means square letters (width = height); 2:1 (tall and vertical); 1:2 (very elongated horizontally)" ;
+          rdfs:label "has Ratio" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasRecordID
+:hasRecordID rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Record ;
+             rdfs:range xsd:string ;
+             rdfs:comment "Contains the system control number assigned by the organization creating, using, or distributing the record." ;
+             rdfs:label "has id" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasRecordInfo
+:hasRecordInfo rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Record ;
+               rdfs:range xsd:string ;
+               rdfs:comment """It is a 24-character field at the very beginning of the MARC record.
+It contains information about:
+
+-Record length (length of the record)
+
+-Type of document (leader position 06, e.g., manuscript, monograph, music)
+
+-Cataloging level (leader position 17)
+
+-Bibliographic level (monograph, serial, etc.)
+
+-Encoding, database, and other control information""" ,
+                            "contains details about the record" ;
+               rdfs:label "has record information" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasRecordTitle
+:hasRecordTitle rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Record ;
+                rdfs:range xsd:string ;
+                rdfs:comment "the title of the record" ;
+                rdfs:label "has record title" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasRecordingTechnique
+:hasRecordingTechnique rdf:type owl:DatatypeProperty ;
+                       rdfs:domain :Support ;
+                       rdfs:range xsd:string ;
+                       rdfs:comment "Means or technique by which information was recorded in or on the material base (e.g., handwritten, engraved, punched, pressed, cut, molded, thermofax, x-ray)" ;
+                       rdfs:label "has Recording Technique" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasReformattingQuality
+:hasReformattingQuality rdf:type owl:DatatypeProperty ;
+                        rdfs:domain :DigitizedVersion ;
+                        rdfs:range xsd:string ;
+                        rdfs:comment "It indicates the purpose or intended use of a digital resource, that is, why it was digitized and at what quality. The \"access\" value designates a resource intended for online consultation or quick reference, but not suitable for long-term preservation. The \"preservation\" value corresponds to a resource created to preserve the original over the long term, with high quality. Finally, the \"replacement\" value designates a digital resource of sufficient quality to replace the original if it is lost, damaged, or destroyed." ;
+                        rdfs:label "has Reformatting Quality" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasRelatedEncoding
+:hasRelatedEncoding rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Catalogue ;
+                    rdfs:range xsd:string ;
+                    rdfs:comment "The RELATEDENCODING attribute should only be set if you want to provide the equivalent of an EAD element in another format using the ENCODINGANALOG attribute. For example, if you decide to create an equivalence to the Dublin Core format for an OAI data export, the value to use is \"dc\"." ;
+                    rdfs:label "has related encoding" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasRelatedMaterialInfo
+:hasRelatedMaterialInfo rdf:type owl:DatatypeProperty ;
+                        rdfs:domain :RelatedMaterial ;
+                        rdfs:range xsd:string ;
+                        rdfs:comment "it gives information about the related documents" ;
+                        rdfs:label "has Related Material Information" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasRelationship
+:hasRelationship rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :DigitizedVersion ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "Relationship between a networked electronic resource at the location identified and the resource described in the record as a whole. It means that if  the record describes a networked electronic or non-electronic  resource." ;
+                 rdfs:label "has relationship" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasRepositoryEncoding
+:hasRepositoryEncoding rdf:type owl:DatatypeProperty ;
+                       rdfs:domain :Catalogue ;
+                       rdfs:range xsd:NMTOKEN ;
+                       rdfs:comment "Standardized identifier for the repository or institution (e.g., BNF = Bibliothèque nationale de France)" ;
+                       rdfs:label "has repository encoding" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasRestrictionInfo
+:hasRestrictionInfo rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :AccessRestriction ;
+                    rdfs:range xsd:string ;
+                    rdfs:comment "a manuscript has restriction information" ;
+                    rdfs:label "has restriction information" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasRestrictionOrNo
+:hasRestrictionOrNo rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Manuscript ;
+                    rdfs:range xsd:string ;
+                    rdfs:comment "It indicates whether an access restriction is applied to the manuscript. The value #: No information provided, 0: no restriction; 1: Restrictions apply. Details about the restrictions are given in the AccessRestrict class." ;
+                    rdfs:label "has Restriction Or No" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasRole
+:hasRole rdf:type owl:DatatypeProperty ;
+         rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( :Contributor
+                                     :Institution
+                                     :Person
+                                     :Place
+                                   )
+                     ] ;
+         rdfs:range xsd:string ;
+         rdfs:comment "The role played by the entity in the resource e.g. illustrator, traductor,production palce, copy place,.." ;
+         rdfs:label "has Role" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasRuledLines
+:hasRuledLines rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Layout ;
+               rdfs:range xsd:int ;
+               rdfs:comment "(ruling lines) specifies the number of ruling lines present per column." ;
+               rdfs:label "has Ruled Lines" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasScope
+:hasScope rdf:type owl:DatatypeProperty ;
+          rdfs:domain :WrittingStyle ;
+          rdfs:range xsd:string ;
+          rdfs:comment "provides attributes to describe, in general terms, the scope of an element’s application. there are 3 suggested values: sole: only this particular feature is used throughout the document; major:this feature is used through most of the document; minor: this feature is used occasionally through the document" ;
+          rdfs:label "has Scope" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasScopeContent
+:hasScopeContent rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Manuscript ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "For additional information beyond that contained in the Description and Identification element, relating to the content, scope, subject, form, nature, and genetic state of the manuscript, such as incipit and explicit text, which are given as quotations in blockquote" ;
+                 rdfs:label "has scope content" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasScribeNumber
+:hasScribeNumber rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Manuscript ;
+                 rdfs:range xsd:int ;
+                 rdfs:comment "specifies the number of different hands (scribes) that could be identified in the manuscript." ;
+                 rdfs:label "has scribe number" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasScript
+:hasScript rdf:type owl:DatatypeProperty ;
+           rdfs:domain :WrittingStyle ;
+           rdfs:range xsd:string ;
+           rdfs:comment "characterizes the calligraphy or particular writing style used by that hand, for example English, chancery, Italian script, etc." ;
+           rdfs:label "has Script" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasScriptEncoding
+:hasScriptEncoding rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :Catalogue ;
+                   rdfs:range xsd:NMTOKEN ;
+                   rdfs:comment "Encoding for the writing system used (e.g., Latn = Latin script, Arab = Arabic script" ;
+                   rdfs:label "has script encoding" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasSeal
+:hasSeal rdf:type owl:DatatypeProperty ;
+         rdfs:domain :CodicologicalInfo ;
+         rdfs:range xsd:string ;
+         rdfs:comment "contains the description of a seal or similar object attached to the manuscript." ;
+         rdfs:label "has seal" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasSettlement
+:hasSettlement rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Address ;
+               rdfs:range xsd:string ;
+               rdfs:comment "(settlement place) contains the name of a settlement place such as a city, town or village, identified as a unique geopolitical or administrative unit." ;
+               rdfs:label "has settlement" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasShelvingLocation
+:hasShelvingLocation rdf:type owl:DatatypeProperty ;
+                     rdfs:domain :Institution ;
+                     rdfs:range xsd:string ;
+                     rdfs:comment "Shelving location of the item within the collection of the holding organization. It may be used to indicate the physical location within a sublocation; for example, reference alcove, oversize shelving" ;
+                     rdfs:label "has Shelving Location" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasShelvingOrder
+:hasShelvingOrder rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Institution ;
+                  rdfs:range xsd:string ;
+                  rdfs:comment "It indicates the numbering system used to shelve the copy; that is, the numbering system the library uses to physically classify this document." ;
+                  rdfs:label "has Shelving Order" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasSourceCodeLang
+:hasSourceCodeLang rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :Language ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "It indicates the origin of the language codes used in the field." ;
+                   rdfs:label "has Source Code Lang" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasSponsor
+:hasSponsor rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Catalogue ;
+            rdfs:range xsd:string ;
+            rdfs:comment "for the names of the people or institutions that supported, financed or organised all or part of the process of creating and disseminating the finding aid (catalogue)" ;
+            rdfs:label "has sponsor" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasState
+:hasState rdf:type owl:DatatypeProperty ;
+          rdfs:domain :CodicologicalInfo ;
+          rdfs:range xsd:string ;
+          rdfs:comment "contains the description of the physical condition of the manuscript and its alterations." ;
+          rdfs:label "has state" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasStatementOfResponsibility
+:hasStatementOfResponsibility rdf:type owl:DatatypeProperty ;
+                              rdfs:domain :Manuscript ;
+                              rdfs:range xsd:string ;
+                              rdfs:comment "It is the text appearing on the document that indicates the people or organizations that participated in the creation of the work. It is reproduced exactly as it appears in the source of information, without modification or standardization." ;
+                              rdfs:label "has Statement Of Responsibility" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasStreet
+:hasStreet rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Address ;
+           rdfs:range xsd:string ;
+           rdfs:comment "A complete street address including a name or number identifying a building and the name of the street or road on which it is located." ;
+           rdfs:label "has street" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasSubTitle
+:hasSubTitle rdf:type owl:DatatypeProperty ;
+             rdfs:domain [ rdf:type owl:Class ;
+                           owl:unionOf ( :Catalogue
+                                         :Collection
+                                         :Manuscript
+                                       )
+                         ] ;
+             rdfs:range xsd:string ;
+             rdfs:comment "for the subtitle or complement to the title" ;
+             rdfs:label "has sub title" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasSubordinateUnit
+:hasSubordinateUnit rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Institution ;
+                    rdfs:range xsd:string ;
+                    rdfs:comment "It is an internal part (internal division) of a main institution, for example the Department of Manuscripts is a subordinate unit that depends on the BNF." ;
+                    rdfs:label "has Subordinate Unit" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasSurface
+:hasSurface rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Image ;
+            rdfs:range xsd:string ;
+            rdfs:comment "define a surface written as a rectangle described by its spatial coordinates, possibly grouping one or more graphical representations of this space and interesting rectangular areas within it." ;
+            rdfs:label "has surface" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasTemporal
+:hasTemporal rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Subject ;
+             rdfs:range xsd:string ;
+             rdfs:comment "Indicates the historical period to which the subject applies. It answers the question: \"when?\"" ;
+             rdfs:label "has Temporal" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasTermsOfAddress
+:hasTermsOfAddress rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :Person ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "for titles and enumeration associated with a name, such as Jr., II, etc." ;
+                   rdfs:label "has terms of address" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasTitle
+:hasTitle rdf:type owl:DatatypeProperty ;
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( :Catalogue
+                                      :Collection
+                                      :Manuscript
+                                    )
+                      ] ;
+          rdfs:range xsd:string ;
+          rdfs:comment "the  title of a work like: catalogue, collection, manuscript,.." ;
+          rdfs:label "has Title" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasTopic
+:hasTopic rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Subject ;
+          rdfs:range xsd:short ;
+          rdfs:comment "Describes the particular aspect, angle, or theme from which the subject is treated. It answers the question: \"What exactly?\"" ;
+          rdfs:label "has Topic" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasTranscribingAgency
+:hasTranscribingAgency rdf:type owl:DatatypeProperty ;
+                       rdfs:domain :Record ;
+                       rdfs:range xsd:string ;
+                       rdfs:comment "code or the name of the organization that transcribed the record into machine-readable form." ;
+                       rdfs:label "has transcribing agency" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasType
+:hasType rdf:type owl:DatatypeProperty ;
+         rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( :AccessRestriction
+                                     :City
+                                     :Date
+                                     :Decoration
+                                     :DigitizedVersion
+                                     :Dimensions
+                                     :Explicit
+                                     :Extent
+                                     :IdentificationInformation
+                                     :Incipit
+                                     :LegalStatus
+                                     :MsItem
+                                     :Support
+                                   )
+                     ] ;
+         rdfs:range xsd:string ;
+         rdfs:comment """It depends on the type of identifier; it can be:
+-\"cote\" (for the current call number)
+-\"ancienne cote\" (for any previous identifier: previous call number within the institution, previous call number in a private collection, catalog number, CGM number, etc.)
+-\"division\" (for a physical or conceptual division within a document)""" ,
+                      """The electronic format type, or the data representation, of the resource. 
+that is to say, to indicate the exact electronic format of the digital resource, for example image/jpeg, application/pdf, text/xml, audio/mpeg, video/mp4""" ,
+                      "for the type of the date, for example: approximative date" ,
+                      "il also indicates the nature of the document owner." ,
+                      "il also used for the type of the extent, for example unit number, duration,.." ,
+                      "it also Identifies what type of access condition is recorded foe eg restriction on access, use and reproduction" ,
+                      "it is also used for the physical medium in which the manuscript is presented, for example in the form of a scroll or codex" ;
+         rdfs:label "has type" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasURL
+:hasURL rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Institution ;
+        rdfs:range xsd:anyURI ;
+        rdfs:comment "The URI links to the repository that holds the item (regardless of whether the item is analog or digital)" ;
+        rdfs:label "has url" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasUniformTitle
+:hasUniformTitle rdf:type owl:DatatypeProperty ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                               owl:unionOf ( :Collection
+                                             :UniformTitleSubject
+                                           )
+                             ] ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "it is to add a uniform title of the title" ;
+                 rdfs:label "has a uniform title" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasUnit
+:hasUnit rdf:type owl:DatatypeProperty ;
+         rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( :Dimensions
+                                     :Extent
+                                   )
+                     ] ;
+         rdfs:range xsd:string ;
+         rdfs:comment "Indicates the unit of measurement (e.g. inches, cm, grams, liters, minutes) for the value(s) in the extent element. It is used to provide more information regarding extent by separating out unit type." ;
+         rdfs:label "has unit" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasUseRestriction
+:hasUseRestriction rdf:type owl:DatatypeProperty ;
+                   rdfs:domain [ rdf:type owl:Class ;
+                                 owl:unionOf ( :Collection
+                                               :Manuscript
+                                             )
+                               ] ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "This is for information indicating whether the reproduction or use of a documentary unit is subject to conditions" ;
+                   rdfs:label "has use restriction" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasVolume
+:hasVolume rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Collection ;
+           rdfs:range xsd:string ;
+           rdfs:comment "This is a volume designation or sequential designation." ;
+           rdfs:label "has volume" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasWaterMark
+:hasWaterMark rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Support ;
+              rdfs:range xsd:string ;
+              rdfs:comment "It contains a word or expression describing a watermark or a similar mark." ;
+              rdfs:label "has water mark" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasWidth
+:hasWidth rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Dimensions ;
+          rdfs:range xsd:string ;
+          rdfs:comment "the width dimension" ;
+          rdfs:label "has width" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#hasWrittenLines
+:hasWrittenLines rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Layout ;
+                 rdfs:range xsd:int ;
+                 rdfs:comment "(writing lines) specifies the number of lines written per column." ;
+                 rdfs:label "has Written Lines" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#isAbsent
+:isAbsent rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Manuscript ;
+          rdfs:range xsd:string ;
+          rdfs:comment "To report the permanent absence of the described manuscript (confirmed disappearance, accidental destruction, permanent transfer or return to its owner)" ;
+          rdfs:label "is absent" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#isDefective
+:isDefective rdf:type owl:DatatypeProperty ;
+             rdfs:domain [ rdf:type owl:Class ;
+                           owl:unionOf ( :Explicit
+                                         :Incipit
+                                       )
+                         ] ;
+             rdfs:range xsd:boolean ;
+             rdfs:comment "indicates whether the incipit or explicit text is defective, i.e. incomplete through loss or damage." ;
+             rdfs:label "is defective" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#isNormalized
+:isNormalized rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Collection ;
+              rdfs:range xsd:boolean ;
+              rdfs:comment "to designate or not secondary collection access points (uniform titles, personal names, etc.)" ;
+              rdfs:label "is normalized or non" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#isOriginal
+:isOriginal rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Binding ;
+            rdfs:range xsd:boolean ;
+            rdfs:comment "describes if the binding is original or no, it is booleen" ;
+            rdfs:label "is Original" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#isTranslation
+:isTranslation rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Language ;
+               rdfs:range xsd:string ;
+               rdfs:comment "It indicates whether the manuscript is a translation or contains a translation" ;
+               rdfs:label "is Translation" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#notAfter
+:notAfter rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Date ;
+          rdfs:range xsd:date ;
+          rdfs:comment "The latest possible date, the event (writing, copying, creation, etc.) cannot be later  than this date" ;
+          rdfs:label "not after" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#notBefore
+:notBefore rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Date ;
+           rdfs:range xsd:date ;
+           rdfs:comment "The earliest possible date, the event (writing, copying, creation, etc.) cannot be earlier than this date" ;
+           rdfs:label "not before" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#principalSubjectOrNo
+:principalSubjectOrNo rdf:type owl:DatatypeProperty ;
+                      rdfs:domain :Subject ;
+                      rdfs:range xsd:string ;
+                      rdfs:comment "It indicates the level of subject,is primary or secondary or nothing specified or no information provided" ;
+                      rdfs:label "principalSubjectOrNo" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#startWith
+:startWith rdf:type owl:DatatypeProperty ;
+           rdfs:domain [ rdf:type owl:Class ;
+                         owl:unionOf ( :Person
+                                       :PersonSubject
+                                     )
+                       ] ;
+           rdfs:range xsd:string ;
+           rdfs:comment "It indicates how the name is formulated (input element) (starts with first name, last name or family name)" ;
+           rdfs:label "start with" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#whenChanged
+:whenChanged rdf:type owl:DatatypeProperty ;
+             rdfs:domain :RevisionDesc ;
+             rdfs:range xsd:date ;
+             rdfs:comment "it is the date or the date and time of the change" ;
+             rdfs:label "when changed" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#whoChanged
+:whoChanged rdf:type owl:DatatypeProperty ;
+            rdfs:domain :RevisionDesc ;
+            rdfs:range xsd:string ;
+            rdfs:comment "indicates the person or group of people who changed the record" ;
+            rdfs:label "who changed" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#AccessRestriction
+:AccessRestriction rdf:type owl:Class ;
+                   rdfs:comment "It is indicated if the described archival unit is subject to access restrictions (consultation conditions imposed by rights holders or by the holding institution in accordance with contractual, regulatory, or legal obligations)." ;
+                   rdfs:label "has access restriction" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Address
+:Address rdf:type owl:Class ;
+         rdfs:comment "address is used for information concerning the address of the holding institution, for example." ;
+         rdfs:label "Address" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#ArchRef
+:ArchRef rdf:type owl:Class ;
+         rdfs:comment "Reference to other archival documents" ;
+         rdfs:label "archival reference" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Author
+:Author rdf:type owl:Class ;
+        rdfs:subClassOf :Person ;
+        rdfs:comment "it is the author of the content of the manuscript or the catalogue" ;
+        rdfs:label "author" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#BibRef
+:BibRef rdf:type owl:Class ;
+        rdfs:comment "it is a bibliography reference contained in a bibliography" ;
+        rdfs:label "bibliographic reference" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Bibliography
+:Bibliography rdf:type owl:Class ;
+              rdfs:comment "provides the bibliographic or descriptive reference" ;
+              rdfs:label "bibliography" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Binding
+:Binding rdf:type owl:Class ;
+         rdfs:comment "it describes the current and former bindings of a manuscript" ;
+         rdfs:label "binding" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Catalogue
+:Catalogue rdf:type owl:Class ;
+           rdfs:comment "It is a finding aid that describes a collection of manuscripts and facilitates access to it for consultation or use by researchers and users.It contains bibliographic records" ;
+           rdfs:label "Catalogue" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#CatalogueIdentifier
+:CatalogueIdentifier rdf:type owl:Class ;
+                     rdfs:comment "It contains essential information for unique identification and computerized catalog management" ;
+                     rdfs:label "Catalogue Identifier" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#City
+:City rdf:type owl:Class ;
+      rdfs:subClassOf :Place ;
+      rdfs:comment "the city wher the manuscript is conserved" ;
+      rdfs:label "city" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#CodicologicalInfo
+:CodicologicalInfo rdf:type owl:Class ;
+                   rdfs:comment "it describes the composition of a codex, in particular the number and organization of the quires, specifying where applicable the presence of signatures, catchwords, old foliations, binding, etc." ;
+                   rdfs:label "Codicological Information" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Collection
+:Collection rdf:type owl:Class ;
+            rdfs:comment "It is a container that contains manuscripts" ;
+            rdfs:label "Collection" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Contributor
+:Contributor rdf:type owl:Class ;
+             rdfs:subClassOf [ rdf:type owl:Class ;
+                               owl:unionOf ( :Institution
+                                             :Person
+                                           )
+                             ] ;
+             rdfs:comment "A contributor is any person,family or institution, that participates in the creation or production of a resource without being its primary author, for example a co-author who writes part of the text, a translator who makes the work accessible in another language, a scholarly editor who adds notes or an introduction, an illustrator who creates images for the work, a writer who contributes specific sections, or a scribe who copies a manuscript." ;
+             rdfs:label "contributor" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#CorporateSubject
+:CorporateSubject rdf:type owl:Class ;
+                  rdfs:subClassOf [ owl:intersectionOf ( :Institution
+                                                         :Subject
+                                                       ) ;
+                                    rdf:type owl:Class
+                                  ] ;
+                  rdfs:comment "It is used when the subject of the manuscript is a collectivity or institution" ;
+                  rdfs:label "corporate subject" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Country
+:Country rdf:type owl:Class ;
+         rdfs:subClassOf :Place ;
+         rdfs:comment "contains the name of a geo-political unit, such as a nation, country, colony, or common wealth, larger than or administratively superior to a region and smaller than a bloc where the manuscript is conserved" ;
+         rdfs:label "country" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Date
+:Date rdf:type owl:Class ;
+      rdfs:comment "it is used for the creation date of an archival unit (the collection or the manuscript)" ;
+      rdfs:label "Date" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Decoration
+:Decoration rdf:type owl:Class ;
+            rdfs:comment "contains the description of the manuscript's decoration" ;
+            rdfs:label "decoration" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#DigitizedVersion
+:DigitizedVersion rdf:type owl:Class ;
+                  rdfs:comment "for the Digitized Version of the manuscript" ;
+                  rdfs:label "Digitized Version" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Dimensions
+:Dimensions rdf:type owl:Class ;
+            rdfs:subClassOf [ rdf:type owl:Class ;
+                              owl:unionOf ( :Institution
+                                            :Person
+                                          )
+                            ] ;
+            rdfs:comment "it is for the dimensions of the manuscript. Dimensions of the object/item as it is catalogued and used (often after folding, binding, etc.)." ;
+            rdfs:label "dimensions" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Distributor
+:Distributor rdf:type owl:Class ;
+             rdfs:comment "it is the distributor of the record" ;
+             rdfs:label "distributor" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#EncodingDesc
+:EncodingDesc rdf:type owl:Class ;
+              rdfs:comment "How was the encoding done and according to which choices / conventions / systems, i.e. how was the file encoded (methods, standards, vocabularies)." ;
+              rdfs:label "encoding description" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Explicit
+:Explicit rdf:type owl:Class ;
+          rdfs:comment "it is the closing words or final passage of a text, marking the end of the work." ;
+          rdfs:label "explicit" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Extent
+:Extent rdf:type owl:Class ;
+        rdfs:comment "Describes the extent of a manuscript or text, in terms of the number of folios, pages, fascicles (gatherings), or volumes (complete books which may contain multiple fascicles) and units of measurement and material. It describes the approximate size of a text stored on its medium, digital or non-digital, expressed in any appropriate unit." ;
+        rdfs:label "extent" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Fragment
+:Fragment rdf:type owl:Class ;
+          rdfs:comment """(fragment of a manuscript) contains information about a fragment of a dispersed manuscript, now preserved separately or incorporated into another manuscript. 
+It is used if the document was originally part of the manuscript but has been removed, detached, scattered, or kept elsewhere. Example: Page torn out and kept elsewhere""" ;
+          rdfs:label "Fragment" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#GeographicSubject
+:GeographicSubject rdf:type owl:Class ;
+                   rdfs:subClassOf [ owl:intersectionOf ( :Place
+                                                          :Subject
+                                                        ) ;
+                                     rdf:type owl:Class
+                                   ] ;
+                   rdfs:comment "It is used when the subject of the manuscript is a geographic name" ;
+                   rdfs:label "Geographic Subject" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#IdentificationInformation
+:IdentificationInformation rdf:type owl:Class ;
+                           rdfs:comment """It is for the identifier of the archival unit.
+it supplies any form of identifier used to identify some object, such as a bibliographic item, a person, a title, an organization, etc. in a standardized way.""" ;
+                           rdfs:label "identification information" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Image
+:Image rdf:type owl:Class ;
+       rdfs:subClassOf :DigitizedVersion ;
+       rdfs:comment "the digitised version of the manuscript may be an image. It contains a representation of any written source in the form of a set of images rather than in the form of a transcribed or encoded text." ;
+       rdfs:label "image" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Incipit
+:Incipit rdf:type owl:Class ;
+         rdfs:comment "it is the opening words or initial passage of a text, used to identify or introduce the work" ;
+         rdfs:label "incipit" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Institution
+:Institution rdf:type owl:Class ;
+             owl:disjointWith :Person ;
+             rdfs:comment """In the <repository> element, the institution or organization responsible for the described archival units is encoded in a Collectivity indexing element <corpname>. This element, which refers to the Directory of Resource Centers, must include the following attributes:
+
+-AUTHFILENUMBER, whose value is the RCR number;
+
+-SOURCE, whose value is \"Répertoire_des_Centres_de_Ressources\";
+
+-NORMAL, whose value is the standardized form of the institution’s name;
+
+However, as an exception to the usual best practices for the <corpname> element, it does not include a ROLE attribute.""" ;
+             rdfs:label "Collectivity" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#LangUsage
+:LangUsage rdf:type owl:Class ;
+           rdfs:comment "It is used to indicate the language or languages in which the finding aid (catalogue) was written. it can contain text" ;
+           rdfs:label "Lang Usage" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Language
+:Language rdf:type owl:Class ;
+          rdfs:comment "It serves to indicate the language or languages ​​in which the manuscript (or its work contents) itself is written (the textual content, the works, the treatises, etc.)." ,
+                       "language is used to encode a language and, if applicable, the associated writing system." ;
+          rdfs:label "Language" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Layout
+:Layout rdf:type owl:Class ;
+        rdfs:comment "it gathers descriptions of the layouts of a manuscript. It describes how the text is laid out on the page, which includes information on any ruling systems, stitching, or other page preparation techniques." ;
+        rdfs:label "layout" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#LegalStatus
+:LegalStatus rdf:type owl:Class ;
+             rdfs:comment "The AccessRestriction element must include the LegalStatus element to specify the owner and the heritage status of the document." ;
+             rdfs:label "legal status" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Manuscript
+:Manuscript rdf:type owl:Class ;
+            rdfs:comment "it is the ressource to be described in a record" ;
+            rdfs:label "Manuscript" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#MsItem
+:MsItem rdf:type owl:Class ;
+        rdfs:comment "describes an individual work (text) or item within the intellectual content of a manuscript or manuscript part.." ;
+        rdfs:label "manuscript item" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Person
+:Person rdf:type owl:Class ;
+        rdfs:comment "A Person is an individual human agent who contributes to the creation, production, or realization of a work, such as an author, scribe, editor, or producer." ;
+        rdfs:label "person" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#PersonSubject
+:PersonSubject rdf:type owl:Class ;
+               rdfs:subClassOf [ owl:intersectionOf ( :Person
+                                                      :Subject
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] ;
+               rdfs:comment "It is used when the subject of the document is a person" ;
+               rdfs:label "person subject" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Place
+:Place rdf:type owl:Class ;
+       rdfs:comment "contains any form of place name, used to identify the place of origin for a manuscript, manuscript part, or other object. is used to identify a place (city, region, country, etc.)." ;
+       rdfs:label "place" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Producer
+:Producer rdf:type owl:Class ;
+          rdfs:subClassOf [ rdf:type owl:Class ;
+                            owl:unionOf ( :Institution
+                                          :Person
+                                        )
+                          ] ;
+          rdfs:comment "It designates the producer in the archival sense, that is, the person or organization that created or assembled a fonds or a collection." ;
+          rdfs:label "producer" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#PublicationInfo
+:PublicationInfo rdf:type owl:Class ;
+                 rdfs:comment "Information about the publictation of the resource, including place of publication, publisher, and dates associated with the resource." ;
+                 rdfs:label "has publiaction informations" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Publisher
+:Publisher rdf:type owl:Class ;
+           rdfs:comment "it is the publisher of the record" ;
+           rdfs:label "publisher" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Quire
+:Quire rdf:type owl:Class ;
+       rdfs:comment "It is for the collation, which is used to describe the physical organization of a manuscript’s leaves by specifying the number of gatherings, their size, their structure (bifolia, lacunae, additions, irregularities), as well as any quire signatures" ;
+       rdfs:label "Quire information" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Record
+:Record rdf:type owl:Class ;
+        rdfs:comment "It is a standardized cataloguing description that represents a manuscript as a unique physical and intellectual object, documenting its content, physical characteristics, provenance, and location in order to enable identification, management, and access." ;
+        rdfs:label "Record" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#RelatedMaterial
+:RelatedMaterial rdf:type owl:Class ;
+                 rdfs:comment "Related documents without physical separation: These are documents that have an intellectual or contextual link, but which have never been part of the same physical set. That is to say, for all documents that are intellectually or historically linked, but never physically united. Example: Another copy of the same text kept in a different library." ;
+                 rdfs:label "Related Material" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#RevisionDesc
+:RevisionDesc rdf:type owl:Class ;
+              rdfs:comment "This is for information on changes or modifications made to the finding aid (catalogue, record)." ;
+              rdfs:label "revision description" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Scribe
+:Scribe rdf:type owl:Class ;
+        rdfs:subClassOf :Person ;
+        rdfs:comment "This is the person who copied a manuscript, that is, who wrote the text onto the material (parchment, paper, etc.). He may also add annotations, corrections, or decorations." ;
+        rdfs:label "scribe" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Subject
+:Subject rdf:type owl:Class ;
+         rdfs:comment "A term or phrase representing the primary topic(s) on which a work is focused. It can be controlled or uncontrolled" ;
+         rdfs:label "subject" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Support
+:Support rdf:type owl:Class ;
+         rdfs:comment "It describes the physical writing support of the manuscript’s text, for example: parchment, paper, papyrus, etc." ;
+         rdfs:label "support" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#Taxonomy
+:Taxonomy rdf:type owl:Class ;
+          rdfs:comment "contains one or more taxonomies defining the classification codes used anywhere in the text. A taxonomy is a structured system of categories that allows information to be classified and organized, indicating the system according to which the subjects, themes, or concepts of the document are classified; for example, LCSH taxonomy." ;
+          rdfs:label "taxonomy" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#TemporalSubject
+:TemporalSubject rdf:type owl:Class ;
+                 rdfs:subClassOf :Subject ;
+                 rdfs:comment "It is used when the subject of the manuscript is a chronological term" ;
+                 rdfs:label "Temporal Subject" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#UniformTitleSubject
+:UniformTitleSubject rdf:type owl:Class ;
+                     rdfs:subClassOf :Subject ;
+                     rdfs:comment "it is used when the subject of the manuscript is a recognized and standardized work title" ;
+                     rdfs:label "Uniform Title Subject" .
+
+
+###  http://www.semanticweb.org/dualcomputer/ontologies/2025/10/ucomm#WrittingStyle
+:WrittingStyle rdf:type owl:Class ;
+               rdfs:comment "describes the writing style used for the manuscript" ;
+               rdfs:label "Writting Style" .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
