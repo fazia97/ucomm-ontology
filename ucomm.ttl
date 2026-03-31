@@ -15,8 +15,7 @@ Furthermore, existing cataloguing standards are generally designed for specific 
 This approach introduces a unified conceptual model, developed from the common concepts of existing standards and formalized using semantic web technologies, notably RDF (Resource Description Framework) and OWL (Web Ontology Language), in order to facilitate the integration, enrichment, and unified querying of heterogeneous catalogues \\r. 
 
 By aligning manuscript metadata with Linked Data principles, the proposed model contributes to improving the compliance of these metadata with the FAIR principles, thereby enhancing their findability, accessibility, interoperability, and reusability within digital library infrastructures."""@en ;
-                                                                    <http://purl.org/dc/elements/1.1/rights> "This work is distributed under a Creative Commons Attribution 4.0 International License (CC BY 4.0)"@en ;
-                                                                    <http://purl.org/dc/terms/license> "CC BY 4.0 License: https://creativecommons.org/licenses/by/4.0/"@en ;
+                                                                    <http://purl.org/dc/elements/1.1/rights> "This work is distributed under a Creative Commons Attribution 4.0 International License (CC BY 4.0) (https://creativecommons.org/licenses/by/4.0/)"@en ;
                                                                     rdfs:comment "UCOMM (Unified Cataloguing Ontology Model for Manuscripts) is an Ontological model for the Heterogeneous Manuscript Resources"@en ;
                                                                     rdfs:label "Unified Cataloguing Ontology Model for Manuscripts"@en ;
                                                                     owl:versionInfo "version 1-1-2026"@en .
