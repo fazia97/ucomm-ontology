@@ -21,7 +21,7 @@ By aligning manuscript metadata with Linked Data principles, the proposed model 
         <dc:rights xml:lang="en">This work is distributed under a Creative Commons Attribution 4.0 International License (CC BY 4.0) (https://creativecommons.org/licenses/by/4.0/)</dc:rights>
         <dc:title xml:lang="en">UCOMM : Unified Cataloguing Ontology Model for Manuscripts</dc:title>
         <rdfs:comment xml:lang="en">UCOMM (Unified Cataloguing Ontology Model for Manuscripts) is an Ontological model for the Heterogeneous Manuscript Resources</rdfs:comment>
-        <owl:versionIRI>&lt;https://w3id.org/ucomm/1.0.0&gt;</owl:versionIRI>
+        <owl:versionIRI>https://w3id.org/ucomm/1.0.0</owl:versionIRI>
         <owl:versionInfo xml:lang="en">version on January 1, 2026</owl:versionInfo>
     </owl:Ontology>
     
