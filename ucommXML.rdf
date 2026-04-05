@@ -2803,13 +2803,16 @@ This may include, for example, the indication that a collection is deposited in 
             </owl:Class>
         </rdfs:domain>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment xml:lang="en">The electronic format type, or the data representation, of the resource. 
-that is to say, to indicate the exact electronic format of the digital resource, for example image/jpeg, application/pdf, text/xml, audio/mpeg, video/mp4</rdfs:comment>
-        <rdfs:comment xml:lang="en">for the type of the date, for example: approximative date</rdfs:comment>
-        <rdfs:comment xml:lang="en">il also used for the type of the extent, for example unit number, duration,..</rdfs:comment>
-        <rdfs:comment xml:lang="en">it is also used for the physical medium in which the manuscript is presented, for example in the form of a scroll or codex</rdfs:comment>
+        <rdfs:comment xml:lang="en">This data property is used for:
+
+-The electronic format type, or the data representation, of the resource. 
+that is to say, to indicate the exact electronic format of the digital resource, for example image/jpeg, application/pdf, text/xml, audio/mpeg, video/mp4.
+- The physical medium in which the manuscript is presented, for example in the form of a scroll or codex.
+-The type of the extent, for example unit number, duration,..
+-The type of the date, for example: approximative date. 
+
+It also Identifies what type of access condition is recorded foe e.g restriction on access, use and reproduction and indicates the nature of the document owner.</rdfs:comment>
         <rdfs:comment>il also indicates the nature of the document owner.</rdfs:comment>
-        <rdfs:comment>it also Identifies what type of access condition is recorded foe eg restriction on access, use and reproduction</rdfs:comment>
         <rdfs:label xml:lang="en">has type</rdfs:label>
     </owl:DatatypeProperty>
     
