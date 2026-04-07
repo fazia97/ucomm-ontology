@@ -10,7 +10,7 @@
      xmlns:terms="http://purl.org/dc/terms/">
     <owl:Ontology rdf:about="https://w3id.org/ucomm/">
         <dc:creator>Fazia BRINIS (ORCID: https://orcid.org/0009-0003-2835-4054)</dc:creator>
-        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">01/01/2026</dc:date>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">01/09/2025</dc:date>
         <dc:description xml:lang="en">Ancient Arabic manuscripts represent a valuable cultural heritage for humanity. Their digitization contributes both to their preservation and to broadening access for the international scholarly community. However, the effective exploitation of these digital resources within digital libraries remains challenged by several major issues. On the one hand, the heterogeneity of the encoding formats of the catalogues, resulting from the use of various standards such as EAD (Encoded Archival Description), TEI (Text Encoding Initiative), MARCXML (Machine Readable Cataloguing), MODS (Metadata Object Description Schema), or DC (Dublin Core) by heritage institutions, complicates cross-catalogue searching. On the other hand, these standards often have gaps or missing information for certain metadata, as the corresponding values are not systematically provided or are poorly represented, which limits semantic exploitation and search quality \r.
 
 Furthermore, existing cataloguing standards are generally designed for specific types of manuscripts, leading to the marginalization of certain manuscript traditions, particularly Arabic manuscripts, which do not currently have a universally adopted cataloguing standard. All of these factors hinder global, integrated and optimal access to digitized collections. To address these issues, this article proposes a semantic approach guided by an ontology called UCOMM (Unified Cataloguing Ontology Model for Manuscripts), which aims to ensure interoperability between the metadata encoding formats of digitized ancient manuscripts . 
@@ -21,8 +21,8 @@ By aligning manuscript metadata with Linked Data principles, the proposed model 
         <dc:rights xml:lang="en">This work is distributed under a Creative Commons Attribution 4.0 International License (CC BY 4.0) (https://creativecommons.org/licenses/by/4.0/)</dc:rights>
         <dc:title xml:lang="en">UCOMM : Unified Cataloguing Ontology Model for Manuscripts</dc:title>
         <rdfs:comment xml:lang="en">UCOMM (Unified Cataloguing Ontology Model for Manuscripts) is an Ontological model for the Heterogeneous Manuscript Resources</rdfs:comment>
-        <owl:versionIRI>https://w3id.org/ucomm/1.0.0</owl:versionIRI>
-        <owl:versionInfo>1.1.0</owl:versionInfo>
+        <owl:versionIRI rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://w3id.org/ucomm/1.0.0</owl:versionIRI>
+        <owl:versionInfo>1.0.0</owl:versionInfo>
     </owl:Ontology>
     
 
@@ -686,7 +686,14 @@ By aligning manuscript metadata with Linked Data principles, the proposed model 
     <!-- https://w3id.org/ucomm/hasRevisionDesc -->
 
     <owl:ObjectProperty rdf:about="https://w3id.org/ucomm/hasRevisionDesc">
-        <rdfs:domain rdf:resource="https://w3id.org/ucomm/Catalogue"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://w3id.org/ucomm/Catalogue"/>
+                    <rdf:Description rdf:about="https://w3id.org/ucomm/Record"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
         <rdfs:range rdf:resource="https://w3id.org/ucomm/RevisionDesc"/>
         <rdfs:comment xml:lang="en">a catalogue has revision description</rdfs:comment>
         <rdfs:label xml:lang="en">has revision description</rdfs:label>
@@ -1447,7 +1454,7 @@ By aligning manuscript metadata with Linked Data principles, the proposed model 
 
     <owl:DatatypeProperty rdf:about="https://w3id.org/ucomm/hasDateValue">
         <rdfs:domain rdf:resource="https://w3id.org/ucomm/Date"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
         <rdfs:comment xml:lang="en">it is the value of the data element</rdfs:comment>
         <rdfs:label xml:lang="en">has date value</rdfs:label>
     </owl:DatatypeProperty>
@@ -2812,7 +2819,6 @@ that is to say, to indicate the exact electronic format of the digital resource,
 -The type of the date, for example: approximative date. 
 
 It also Identifies what type of access condition is recorded foe e.g restriction on access, use and reproduction and indicates the nature of the document owner.</rdfs:comment>
-        <rdfs:comment>il also indicates the nature of the document owner.</rdfs:comment>
         <rdfs:label xml:lang="en">has type</rdfs:label>
     </owl:DatatypeProperty>
     
