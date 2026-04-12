@@ -9,6 +9,8 @@
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:terms="http://purl.org/dc/terms/">
     <owl:Ontology rdf:about="https://w3id.org/ucomm/">
+        <dc:contributor>Bouarab Farida (ORCID : https://orcid.org/0000-0003-3286-8026)</dc:contributor>
+        <dc:contributor>Mohammed Ourabah Soualah (ORCID: https://orcid.org/0009-0009-2605-4991)</dc:contributor>
         <dc:creator>Fazia BRINIS (ORCID: https://orcid.org/0009-0003-2835-4054)</dc:creator>
         <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">01/09/2025</dc:date>
         <dc:description xml:lang="en">Ancient Arabic manuscripts represent a valuable cultural heritage for humanity. Their digitization contributes both to their preservation and to broadening access for the international scholarly community. However, the effective exploitation of these digital resources within digital libraries remains challenged by several major issues. On the one hand, the heterogeneity of the encoding formats of the catalogues, resulting from the use of various standards such as EAD (Encoded Archival Description), TEI (Text Encoding Initiative), MARCXML (Machine Readable Cataloguing), MODS (Metadata Object Description Schema), or DC (Dublin Core) by heritage institutions, complicates cross-catalogue searching. On the other hand, these standards often have gaps or missing information for certain metadata, as the corresponding values are not systematically provided or are poorly represented, which limits semantic exploitation and search quality \r.
@@ -34,6 +36,12 @@ By aligning manuscript metadata with Linked Data principles, the proposed model 
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/contributor -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/contributor"/>
     
 
 
