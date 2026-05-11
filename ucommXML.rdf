@@ -7,6 +7,7 @@
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
      xmlns:terms="http://purl.org/dc/terms/">
     <owl:Ontology rdf:about="https://w3id.org/ucomm/">
         <dc:creator>Fazia BRINIS (ORCID: https://orcid.org/0009-0003-2835-4054)</dc:creator>
@@ -82,6 +83,12 @@ By aligning manuscript metadata with Linked Data principles, the proposed model 
     <!-- http://www.w3.org/2002/07/owl#versionIRI -->
 
     <owl:AnnotationProperty rdf:about="http://www.w3.org/2002/07/owl#versionIRI"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#altLabel -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#altLabel"/>
     
 
 
@@ -350,6 +357,15 @@ By aligning manuscript metadata with Linked Data principles, the proposed model 
         <rdfs:range rdf:resource="https://w3id.org/ucomm/CodicologicalInfo"/>
         <rdfs:comment xml:lang="en">it contains the description of the physical components of the manuscript</rdfs:comment>
         <rdfs:label xml:lang="en">has Codicological Information</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/ucomm/hasColophon -->
+
+    <owl:ObjectProperty rdf:about="https://w3id.org/ucomm/hasColophon">
+        <rdfs:domain rdf:resource="https://w3id.org/ucomm/MsItem"/>
+        <rdfs:range rdf:resource="https://w3id.org/ucomm/Colophon"/>
     </owl:ObjectProperty>
     
 
@@ -1302,8 +1318,17 @@ By aligning manuscript metadata with Linked Data principles, the proposed model 
     <owl:DatatypeProperty rdf:about="https://w3id.org/ucomm/hasColophon">
         <rdfs:domain rdf:resource="https://w3id.org/ucomm/MsItem"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment xml:lang="en">contains the colophon of an item: that is, a statement providing information regarding the date, place, agency, or reason for production of the manuscript</rdfs:comment>
-        <rdfs:label xml:lang="en">has colophon</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://w3id.org/ucomm/hasColophonText -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/ucomm/hasColophonText">
+        <rdfs:domain rdf:resource="https://w3id.org/ucomm/Colophon"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">it is the text of the colophon</rdfs:comment>
+        <rdfs:label xml:lang="en">has colophon text</rdfs:label>
     </owl:DatatypeProperty>
     
 
@@ -1777,6 +1802,7 @@ By aligning manuscript metadata with Linked Data principles, the proposed model 
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="https://w3id.org/ucomm/IdentificationInformation"/>
+                    <rdf:Description rdf:about="https://w3id.org/ucomm/Publisher"/>
                     <rdf:Description rdf:about="https://w3id.org/ucomm/Taxonomy"/>
                 </owl:unionOf>
             </owl:Class>
@@ -2011,6 +2037,7 @@ By aligning manuscript metadata with Linked Data principles, the proposed model 
         <rdfs:domain>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://w3id.org/ucomm/Colophon"/>
                     <rdf:Description rdf:about="https://w3id.org/ucomm/Explicit"/>
                     <rdf:Description rdf:about="https://w3id.org/ucomm/Incipit"/>
                     <rdf:Description rdf:about="https://w3id.org/ucomm/Layout"/>
@@ -2184,6 +2211,17 @@ By aligning manuscript metadata with Linked Data principles, the proposed model 
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
         <rdfs:comment xml:lang="en">it is used to number or label an msItem according to its order within the manuscript</rdfs:comment>
         <rdfs:label xml:lang="en">has number</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://w3id.org/ucomm/hasOrgName -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/ucomm/hasOrgName">
+        <rdfs:domain rdf:resource="https://w3id.org/ucomm/Address"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">the name of the organisation which is included in the address of publication</rdfs:comment>
+        <rdfs:label xml:lang="en">has organisation name</rdfs:label>
     </owl:DatatypeProperty>
     
 
@@ -2960,6 +2998,17 @@ It also Identifies what type of access condition is recorded foe e.g restriction
     
 
 
+    <!-- https://w3id.org/ucomm/hasWrittingInfo -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/ucomm/hasWrittingInfo">
+        <rdfs:domain rdf:resource="https://w3id.org/ucomm/WrittingStyle"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">it is details about the writing information</rdfs:comment>
+        <rdfs:label xml:lang="en">has writting information</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- https://w3id.org/ucomm/isAbsent -->
 
     <owl:DatatypeProperty rdf:about="https://w3id.org/ucomm/isAbsent">
@@ -3080,6 +3129,17 @@ It also Identifies what type of access condition is recorded foe e.g restriction
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
         <rdfs:comment xml:lang="en">it is the date or the date and time of the change</rdfs:comment>
         <rdfs:label xml:lang="en">when changed</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://w3id.org/ucomm/whenProduced -->
+
+    <owl:DatatypeProperty rdf:about="https://w3id.org/ucomm/whenProduced">
+        <rdfs:domain rdf:resource="https://w3id.org/ucomm/Producer"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+        <rdfs:comment xml:lang="en">the date when the original record was produced by a producer(tei encoder, cataloguer,..).</rdfs:comment>
+        <rdfs:label xml:lang="en">when produced</rdfs:label>
     </owl:DatatypeProperty>
     
 
@@ -3212,6 +3272,15 @@ It also Identifies what type of access condition is recorded foe e.g restriction
     <owl:Class rdf:about="https://w3id.org/ucomm/Collection">
         <rdfs:comment xml:lang="en">It is a container that contains manuscripts</rdfs:comment>
         <rdfs:label xml:lang="en">Collection</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://w3id.org/ucomm/Colophon -->
+
+    <owl:Class rdf:about="https://w3id.org/ucomm/Colophon">
+        <rdfs:comment xml:lang="en">contains the colophon of an item: that is, a statement providing information regarding the date, place, agency, or reason for production of the manuscript</rdfs:comment>
+        <rdfs:label xml:lang="en">colophon</rdfs:label>
     </owl:Class>
     
 
@@ -3573,6 +3642,7 @@ it supplies any form of identifier used to identify some object, such as a bibli
         <rdfs:subClassOf rdf:resource="https://w3id.org/ucomm/Person"/>
         <rdfs:comment xml:lang="en">This is the person who copied a manuscript, that is, who wrote the text onto the material (parchment, paper, etc.). He may also add annotations, corrections, or decorations. He is also called  copyist</rdfs:comment>
         <rdfs:label xml:lang="en">scribe</rdfs:label>
+        <skos:altLabel xml:lang="en">copyist</skos:altLabel>
     </owl:Class>
     
 
@@ -3645,17 +3715,15 @@ it supplies any form of identifier used to identify some object, such as a bibli
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
-    // Individuals
+    // Annotations
     //
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-    
-
-
-    <!-- https://w3id.org/ucomm/dat -->
-
-    <owl:NamedIndividual rdf:about="https://w3id.org/ucomm/dat"/>
+    <rdf:Description rdf:about="https://w3id.org/ucomm/hasColophon">
+        <rdfs:comment xml:lang="en">a manuscript item can contain a colophon</rdfs:comment>
+        <rdfs:label xml:lang="en">has colophon</rdfs:label>
+    </rdf:Description>
 </rdf:RDF>
 
 
