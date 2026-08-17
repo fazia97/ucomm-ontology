@@ -67,9 +67,7 @@ By aligning manuscript metadata with Linked Data principles, the proposed model 
 
     <!-- http://purl.org/dc/elements/1.1/rights -->
 
-    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/rights">
-        <skos:prefLabel xml:lang="en">translator</skos:prefLabel>
-    </owl:AnnotationProperty>
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/rights"/>
     
 
 
