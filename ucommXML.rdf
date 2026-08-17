@@ -921,10 +921,7 @@ By aligning manuscript metadata with Linked Data principles, the proposed model 
 
     <!-- http://purl.org/dc/terms/identifier -->
 
-    <owl:DatatypeProperty rdf:about="http://purl.org/dc/terms/identifier">
-        <rdfs:comment xml:lang="en">An identifier assigned to a catalogue or manuscript item in the UCOMM model.</rdfs:comment>
-        <rdfs:label xml:lang="en">identifier</rdfs:label>
-    </owl:DatatypeProperty>
+    <owl:DatatypeProperty rdf:about="http://purl.org/dc/terms/identifier"/>
     
 
 
